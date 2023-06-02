@@ -14,6 +14,7 @@ function Signup() {
     firstName: "",
     lastName: "",
     email: "",
+    address:"",
     password: "",
     confirmPassword: "",
     image : ""
@@ -52,8 +53,8 @@ function Signup() {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
-    const { firstName, email, password, confirmPassword } = data;
-    if (firstName && email && password && confirmPassword) {
+    const { firstName, email, password, confirmPassword,address } = data;
+    if (firstName && email && password && confirmPassword && address) {
       if (password === confirmPassword) {
     setLoading(true)
           const fetchData = await fetch(`http://localhost:3001/signup`,{
@@ -122,6 +123,16 @@ function Signup() {
             name="email"
             className="mt-1 mb-2 w-full bg-slate-200 px-2 py-1 rounded focus-within:outline-blue-300"
             value={data.email}
+            onChange={handleOnChange}
+          />
+
+          <label htmlFor="email">Address</label>
+          <input
+            type={"text"}
+            id="address"
+            name="address"
+            className="mt-1 mb-2 w-full bg-slate-200 px-2 py-1 rounded focus-within:outline-blue-300"
+            value={data.address}
             onChange={handleOnChange}
           />
 

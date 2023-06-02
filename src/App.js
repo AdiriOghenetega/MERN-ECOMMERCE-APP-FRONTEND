@@ -62,8 +62,9 @@ function App() {
     })()
   }, [])
 
-  //store cart data to local storage whenever cart changes
+  //store cart data
   useEffect(() => {
+    //store cart data to local storage whenever cart changes
     //first check if there is already a stored cart
     const cartExists = window.localStorage.getItem('cart')
     //remove current cart data if one exists
@@ -84,7 +85,7 @@ function App() {
     if (user) {
       //send or update user cart database in server
       (async () => {
-        const res = await fetch(`http://localhost:3001/addCart/${JSON.parse(user)}`, {
+        const res = await fetch(`http://localhost:3001/updatecart/${JSON.parse(user)}`, {
           method: "PUT",
           headers: {
             "content-type": "application/json"

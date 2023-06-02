@@ -24,6 +24,7 @@ import Success from "./page/Success";
 import Cancel from "./page/Cancel";
 import { store } from './redux/store';
 import UpdateProducts from "./page/updateProducts";
+import Confirmation from "./page/confirmation"
 
 
 const router = createBrowserRouter(
@@ -41,6 +42,7 @@ const router = createBrowserRouter(
       <Route path="cart" element={<Cart />} />
       <Route path="success" element={<Success/>}/>
       <Route path="cancel" element={<Cancel/>}/>
+      <Route path="confirmation" element={<Confirmation />}/>
     </Route>
   )
 );

@@ -16,7 +16,11 @@ export const productSlice = createSlice({
       state.productList = [...action.payload];
     },
     setCartData: (state, action) => {
-      state.cartItem = [...action.payload];
+      if(action.payload.length){
+        state.cartItem = [...action.payload];
+      }else{
+        state.cartItem = []
+      }
     },
     addCartItem: (state, action) => {
       const check = state.cartItem.some((el) => el._id === action.payload._id);

@@ -25,22 +25,13 @@ const Cart = () => {
   const handlePayment = async()=>{
 
       if(user.email){
-          
-          const stripePromise = await loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY)
-          const res = await fetch(`http://localhost:3001/create-checkout-session`,{
-            method : "POST",
-            headers  : {
-              "content-type" : "application/json"
-            },
-            body  : JSON.stringify(productCartItem)
-          })
-          if(res.statusCode === 500) return;
+          const res = await fetch(`http://localhost:3001/payment?amount=25000&id=6478d2e84a16f2c85226c5ef`)
 
           const data = await res.json()
           console.log(data)
 
           toast("Redirect to payment Gateway...!")
-          stripePromise.redirectToCheckout({sessionId : data}) 
+          window.location.href = data.data.authorization_url
       }
       else{
         toast("You have not Login!")
@@ -61,7 +52,7 @@ const Cart = () => {
         {productCartItem[0] ?
         <div className="my-4 flex gap-3">
           {/* display cart items  */}
-          <div className="w-full max-w-3xl ">
+          <div className="w-full max-w-3xl flex flex-col gap-2">
             {productCartItem.map((el) => {
               return (
                 <CartProduct

@@ -61,7 +61,7 @@ const Login = () => {
       if(dataRes.alert){
         localStorage.setItem('user', JSON.stringify(dataRes.data._id))
         dispatch(loginRedux(dataRes.data))
-        dispatch(setCartData(dataRes.data.cart))
+        dispatch(setCartData(dataRes.cart))
         setTimeout(() => {
           navigate("/")
         }, 1000);
