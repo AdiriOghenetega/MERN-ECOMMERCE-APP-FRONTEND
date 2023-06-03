@@ -1,15 +1,16 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 import CartProduct from "../component/cartProduct";
 import emptyCartImage from "../assets/empty-cart.gif"
 import { toast } from "react-hot-toast";
-import {loadStripe} from '@stripe/stripe-js';
-import { useNavigate } from "react-router-dom";
+import {setCartData} from "../redux/productSlice"
+import { Link, useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const productCartItem = useSelector((state) => state.product.cartItem);
   const user = useSelector(state => state.user)
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const totalPrice = productCartItem.reduce(
     (acc, curr) => acc + parseInt(curr.total),
@@ -23,13 +24,31 @@ const Cart = () => {
   
   
   const handlePayment = async()=>{
-
+console.log(user)
       if(user.email){
-          const res = await fetch(`http://localhost:3001/payment?amount=25000&id=6478d2e84a16f2c85226c5ef`)
+          const res = await fetch(`http://localhost:3001/payment?amount=${totalPrice}&id=${user._id}`)
 
           const data = await res.json()
           console.log(data)
 
+          const orderRes = await fetch(`http://localhost:3001/createorder`,{
+        method : "POST",
+        headers : {
+          "content-type" : "application/json"
+        },
+        body : JSON.stringify({
+          amount:totalPrice,
+          userID:user._id,
+          method: "online",
+          payment_status:"paid",
+          order_status: "pending",
+          reference: data?.data?.reference
+        })
+      })
+
+      const orderData = await orderRes.json()
+      console.log(orderData)
+          dispatch(setCartData([]))
           toast("Redirect to payment Gateway...!")
           window.location.href = data.data.authorization_url
       }
@@ -92,7 +111,10 @@ const Cart = () => {
         <>
           <div className="flex w-full justify-center items-center flex-col p-4">
             <img src={emptyCartImage} className="w-full max-w-sm rounded-lg drop-shadow-2xl" />
-            <p className="text-[rgb(248,173,0)] text-3xl font-bold">Empty Cart</p>
+            <p className="text-[rgb(248,173,0)] text-3xl font-bold mt-4">Empty Cart</p>
+            <Link to={"/menu"}>
+              <button className="w-full max-w-[150px] m-auto  bg-[rgb(233,142,30)] hover:bg-orange-600 cursor-pointer text-white text-center p-2 rounded mt-4">Start Shopping</button>
+            </Link>
           </div>
         </>
       }

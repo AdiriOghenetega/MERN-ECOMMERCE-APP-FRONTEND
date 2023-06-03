@@ -5,7 +5,8 @@ const cartDataFromStorage = window.localStorage.getItem('cart')
 
 const initialState = {
   productList: [],
-  cartItem: cartDataFromStorage ? [...JSON.parse(cartDataFromStorage)]:[]
+  cartItem: cartDataFromStorage ? [...JSON.parse(cartDataFromStorage)]:[],
+  orderList:[]
 };
 
 export const productSlice = createSlice({
@@ -21,6 +22,9 @@ export const productSlice = createSlice({
       }else{
         state.cartItem = []
       }
+    },
+    setOrderData: (state, action) => {
+      state.orderList = [...action.payload];
     },
     addCartItem: (state, action) => {
       const check = state.cartItem.some((el) => el._id === action.payload._id);
@@ -75,6 +79,7 @@ export const productSlice = createSlice({
 export const {
   setDataProduct,
   setCartData,
+  setOrderData,
   addCartItem,
   deleteCartItem,
   increaseQty,
