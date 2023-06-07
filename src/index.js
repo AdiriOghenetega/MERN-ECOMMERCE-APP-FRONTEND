@@ -16,7 +16,7 @@ import Product from "./page/product";
 import About from "./page/About";
 import Contact from "./page/Contact";
 import Login from "./page/login";
-import Newproduct from "./page/Newproduct";
+import Admin from "./page/admin";
 import Signup from "./page/Signup";
 import { Provider } from "react-redux";
 import Cart from "./page/Cart";
@@ -36,8 +36,8 @@ const router = createBrowserRouter(
       <Route path="about" element={<About />} />
       <Route path="contact" element={<Contact />} />
       <Route path="login" element={<Login />} />
-      <Route path="newproduct" element={<Newproduct />} />
-      <Route path="newproduct/:location" element={<UpdateProducts />} />
+      <Route path="admin" element={<Admin />} />
+      <Route path="admin/:location" element={<UpdateProducts />} />
       <Route path="signup" element={<Signup />} />
       <Route path="cart" element={<Cart />} />
       <Route path="success" element={<Success/>}/>

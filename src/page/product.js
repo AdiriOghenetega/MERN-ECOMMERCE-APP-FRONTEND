@@ -29,7 +29,7 @@ const Product = () => {
             className="hover:scale-105 transition-all h-full w-full"
           />
         </div>
-        <div className="flex flex-col gap-1 py-5">
+        <div className="flex flex-col gap-1 py-5 pl-5 md:pl-0">
           <h3 className="font-semibold text-slate-600  capitalize text-2xl md:text-4xl">
             {productDisplay?.name}
           </h3>

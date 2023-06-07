@@ -70,10 +70,10 @@ const Header = () => {
               <div className="absolute right-2 bg-white py-2  shadow drop-shadow-md flex flex-col min-w-[120px] text-center">
                  
                   <Link
-                    to={"newproduct"}
+                    to={"admin"}
                     className="whitespace-nowrap cursor-pointer px-2"
                   >
-                    New product
+                    Admin Dashboard
                   </Link>
                 
 
@@ -96,6 +96,7 @@ const Header = () => {
                   <Link to={""} className="px-2 py-1">
                     Home
                   </Link>
+                  <Link to={`menu/${location}`}>Menu</Link>
                   <Link to={"contact"} className="px-2 py-1">
                     Contact
                   </Link>

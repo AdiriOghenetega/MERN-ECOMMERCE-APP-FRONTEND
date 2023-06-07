@@ -11,6 +11,7 @@ const Cart = () => {
   const user = useSelector(state => state.user)
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const location = localStorage.getItem("location")
 
   const totalPrice = productCartItem.reduce(
     (acc, curr) => acc + parseInt(curr.total),
@@ -42,7 +43,9 @@ console.log(user)
           method: "online",
           payment_status:"paid",
           order_status: "pending",
-          reference: data?.data?.reference
+          reference: data?.data?.reference,
+          cartData:productCartItem,
+          location : location
         })
       })
 
@@ -69,7 +72,7 @@ console.log(user)
         </h2>
 
         {productCartItem[0] ?
-        <div className="my-4 flex gap-3">
+        <div className="my-4 flex flex-col md:flex-row gap-3">
           {/* display cart items  */}
           <div className="w-full max-w-3xl flex flex-col gap-2">
             {productCartItem.map((el) => {
@@ -112,7 +115,7 @@ console.log(user)
           <div className="flex w-full justify-center items-center flex-col p-4">
             <img src={emptyCartImage} className="w-full max-w-sm rounded-lg drop-shadow-2xl" />
             <p className="text-[rgb(248,173,0)] text-3xl font-bold mt-4">Empty Cart</p>
-            <Link to={"/menu"}>
+            <Link to={`/menu/${location}`}>
               <button className="w-full max-w-[150px] m-auto  bg-[rgb(233,142,30)] hover:bg-orange-600 cursor-pointer text-white text-center p-2 rounded mt-4">Start Shopping</button>
             </Link>
           </div>

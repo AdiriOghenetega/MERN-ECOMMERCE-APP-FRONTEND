@@ -28,21 +28,21 @@ const [showModal,setShowModal] = useState(false)
   return (
     <div className="flex flex-col justify-center items-center bg-white relative">
     {showModal && (<div className="absolute h-[100%] w-full min-h-full min-w-full bg-transparent backdrop-blur-[2px] z-40 flex flex-col justify-start items-center">
-      <div className="bg-slate-200/70 rounded h-[350px] w-[500px] drop-shadow-2xl mt-44 flex flex-col justify-center items-center">
+      <div className="bg-slate-200/70 rounded h-[350px] md:w-[500px] w-full drop-shadow-2xl mt-44 flex flex-col justify-center items-center md:p-4">
       <div className="absolute top-0 right-0 m-2 text-[rgb(233,142,30)] cursor-pointer" onClick={()=> setShowModal(false)}><MdCancel size="20px" /></div>
       <a href='https://pngtree.com/so/closed'><img src={storeclosed} alt='store closed' className='h-44 w-44 rounded-full drop-shadow bg-white' /></a> 
-  <h2 className='text-3xl text-bold text-[rgb(233,142,30)]'>Sorry we are not open at this time </h2>
+  <h2 className='md:text-2xl text-lg text-bold text-[rgb(233,142,30)]'>Sorry we are not open at this time </h2>
   <p className='text-slate-600 '>Opening hours between 9am - 10pm</p>
       </div>
     </div>)}
-      <div className="flex flex-col justify-center items-center h-[530px] bg-hero-pattern bg-no-repeat bg-contain bg-left w-full backdrop-blur-[1.5px]">
+      <div className="flex flex-col justify-center items-center h-[530px] bg-hero-pattern bg-no-repeat bg-contain md:bg-[right 30rem] w-full backdrop-blur-[1.5px]">
           <IntroComponent closed={closed} />
       </div>
       <hr className="w-[80%] m-4" />
-      <div className="flex flex-col justify-center items-center h-[400px] w-full">
+      <div className="flex flex-col justify-center items-center max-h-auto md:max-h-[400px] w-full">
         <h1 className='text-3xl text-[rgb(233,142,30)] p-2 drop-shadow-lg'>how to order</h1>
-        <div className="flex justify-evenly items-center mt-5 w-full">
-          <div className="flex flex-col justify-start items-center border-2 p-2 drop-shadow h-[300px] bg-[rgb(255,255,255,.8)]">
+        <div className="flex flex-col md:flex-row justify-center gap-3 md:gap-0 md:justify-evenly items-center mt-5 w-full">
+          <div className="flex flex-col justify-start items-center border-2 p-2 drop-shadow h-[300px] bg-[rgb(255,255,255,.8)] min-w-[80%] md:min-w-0">
             <div className="flex flex-col justify-center my-10 items-center text-[rgb(233,142,30)] animate-bounce">
               <MdShareLocation size="100px" />
             </div>
@@ -54,7 +54,7 @@ const [showModal,setShowModal] = useState(false)
               location.
             </h3>
           </div>
-          <div className="flex flex-col justify-start items-center border-2 p-2 drop-shadow h-[300px] bg-[rgb(255,255,255,.8)]">
+          <div className="flex flex-col justify-start items-center border-2 p-2 drop-shadow h-[300px] bg-[rgb(255,255,255,.8)] min-w-[80%] md:min-w-0">
             <div className="flex flex-col justify-center my-10 items-center text-[rgb(233,142,30)] animate-bounce">
               <MdFoodBank size="100px" />
             </div>
@@ -66,7 +66,7 @@ const [showModal,setShowModal] = useState(false)
               menu.
             </h3>
           </div>
-          <div className="flex flex-col justify-start items-center border-2 p-2 drop-shadow h-[300px] bg-[rgb(255,255,255,.8)]">
+          <div className="flex flex-col justify-start items-center border-2 p-2 drop-shadow h-[300px] bg-[rgb(255,255,255,.8)] min-w-[80%] md:min-w-0">
             <div className="flex flex-col justify-center my-10 items-center text-[rgb(233,142,30)] animate-bounce">
               <IoFastFoodOutline size="100px" />
             </div>
@@ -81,27 +81,27 @@ const [showModal,setShowModal] = useState(false)
       </div>
       <hr className="w-[80%] m-4" />
       <div className="h-[400px] w-full flex flex-col justify-center items-center relative">
-        <div className="bg-gradient-to-r from-[rgb(233,142,30)] h-[300px] w-full p-10 flex flex-col justify-between">
-          <h3 className="text-white text-lg text-bold w-[450px]">
+        <div className="md:bg-gradient-to-r md:from-[rgb(233,142,30)] bg-[rgb(233,142,30)] h-[300px] w-full p-10 flex flex-col justify-between">
+          <h3 className="text-white text-sm md:text-lg text-bold md:w-[450px]">
             With the HcueEats App, anyone can simply use a mobile device to look
             over our numerous delicacies. All you need to do is to place an
             order, and pick up in-store or have it delivered to your doorstep.
           </h3>
-          <div className="flex w-[330px] justify-between items-center">
+          <div className="flex md:w-[330px] w-full justify-between items-center">
             <img
               src={gstore}
               alt="googlestore"
-              className="h-[45px] w-[150px] drop-shadow-lg"
+              className="h-[45px] md:w-[150px] w-[40%] w-auto drop-shadow-lg"
             />
             <img
               src={istore}
               alt="applestore"
-              className="h-[45px] w-[150px] drop-shadow-lg"
+              className="h-[45px] md:w-[150px] w-[40%] drop-shadow-lg"
             />
           </div>
         </div>
 
-        <motion.div className="absolute flex flex-col justify-center items-center z-10" initial={{x:0}}
+        <motion.div className="absolute flex-col justify-center items-center z-10 hidden md:flex" initial={{x:0}}
         whileInView={{
           x: [0,200],
         }}
@@ -111,7 +111,7 @@ const [showModal,setShowModal] = useState(false)
           <img src={appImage1} alt="appimage1" className="w-[200px] h-[380px] border-2 border-slate-400 drop-shadow rounded-2xl" />
           <div className="w-[20%] h-[3px] absolute top-[8px] bg-black rounded-lg"></div>
         </motion.div>
-        <div className="absolute flex flex-col justify-center items-center ml-[250px] mt-[10px]">
+        <div className="absolute md:flex hidden flex-col justify-center items-center ml-[250px] mt-[10px]">
           <img src={appImage2} alt="appimage2" className="w-[200px] h-[380px] border-2 border-slate-400 drop-shadow rounded-2xl" />
           <div className="w-[20%] h-[3px] absolute top-[8px] bg-black rounded-lg"></div>
         </div>
