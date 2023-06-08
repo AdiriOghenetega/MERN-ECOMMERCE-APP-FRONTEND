@@ -19,17 +19,18 @@ const Admin = () => {
     stores: [],
   })
 
+  console.log(data)
+
   const [loading, setLoading] = useState(false);
 
   const [orderLoading, setOrderLoading] = useState(false);
-  console.log(orderLoading)
 
   const [location, setLocation] = useState("");
 
   const [count, setCount] = useState(0);
 
   const orderList = useSelector((state) => state.product.orderList);
-  console.log(orderList);
+ 
 
   const navigate = useNavigate();
 
@@ -66,10 +67,11 @@ const Admin = () => {
   };
 
   const handleSelect = (selected) => {
-    setData((prev) => {
+    console.log(selected)
+    setData(prev => {
       return {
         ...prev,
-        stores: selected.value,
+        stores : selected,
       };
     });
   };
