@@ -3,6 +3,7 @@ import Select from 'react-select';
 import {toast} from "react-hot-toast"
 import { useParams } from 'react-router-dom';
 import {GiHamburger} from "react-icons/gi"
+import { useSelector } from "react-redux";
 
 const UpdateProducts = () => {
     const [updateList,setUpdateList]=useState([])
