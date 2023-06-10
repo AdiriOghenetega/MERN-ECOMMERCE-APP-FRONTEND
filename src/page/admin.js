@@ -25,6 +25,10 @@ const Admin = () => {
 
   const [roleLoading, setRoleLoading] = useState(false);
 
+  const [loadingProductDelete, setLoadingProductDelete] = useState(false);
+
+  const [deleteProductList, setDeleteProductList] = useState([]);
+
   const [location, setLocation] = useState("");
 
   const [count, setCount] = useState(0);
@@ -34,7 +38,8 @@ const Admin = () => {
     role: "",
   });
 
-  
+  const [productData, setProductData] = useState([]);
+
   const orderList = useSelector((state) => state.product.orderList);
   const user = useSelector((state) => state.user);
 
@@ -42,25 +47,41 @@ const Admin = () => {
 
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    (async () => {
+      setLoading(true);
+      const res = await fetch(`http://localhost:3001/product`, {
+        credentials: "include",
+      });
+      const resData = await res.json();
+      setProductData(resData);
+      setLoading(false);
+    })();
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      setOrderLoading(true);
+      const fetchOrders = await fetch(`http://localhost:3001/getorders`);
+      const res = await fetchOrders.json();
+
+      if (res) {
+        res.data && dispatch(setOrderData(res.data));
+        res.message && toast(res.message);
+        setOrderLoading(false);
+      }
+    })();
+  }, []);
+
+  const deleteOptions = productData.map((el) => {
+    return { label: el.name, value: el._id };
+  });
+
   const options = [
     { value: "Abuloma", label: "Abuloma" },
     { value: "Rumuodara", label: "Rumuodara" },
     { value: "Phrc", label: "Phrc" },
   ];
-
-  useEffect(() => {
-    (async () => {
-      setOrderLoading(true);
-      const fetchOrders = await fetch(`http://localhost:3001/getorders/${user?._id}`);
-      const res = await fetchOrders.json();
-
-      if (res) {
-        res.data && dispatch(setOrderData(res.data));
-        setOrderLoading(false);
-        res.message && toast(res.message)
-      }
-    })();
-  }, []);
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -101,13 +122,16 @@ const Admin = () => {
 
     if (name && image && category && price && stores) {
       setLoading(true);
-      const fetchData = await fetch(`http://localhost:3001/uploadProduct/${user?._id}`, {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+      const fetchData = await fetch(
+        `http://localhost:3001/uploadProduct/${user?._id}`,
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
 
       const fetchRes = await fetchData.json();
 
@@ -164,26 +188,29 @@ const Admin = () => {
     if (res) {
       res.data && dispatch(setOrderData(res.data));
       setOrderLoading(false);
-      res.message && toast(res.message)
+      res.message && toast(res.message);
     }
   };
 
   const deleteOrderList = async () => {
     setOrderLoading(true);
-    const deleteOrder = await fetch(`http://localhost:3001/deleteall/${user?._id}`, {
-      method: "DELETE",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(orderList),
-    });
+    const deleteOrder = await fetch(
+      `http://localhost:3001/deleteall/${user?._id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(orderList),
+      }
+    );
     const res = await deleteOrder.json();
 
     if (res) {
       res.data && dispatch(setOrderData(res.data));
       setOrderLoading(false);
       window.location.reload(true);
-      res.message && toast(res.message)
+      res.message && toast(res.message);
     }
   };
 
@@ -204,7 +231,7 @@ const Admin = () => {
     if (res) {
       res.data && dispatch(setOrderData(res.data));
       setOrderLoading(false);
-      res.message && toast(res.message)
+      res.message && toast(res.message);
       window.location.reload(true);
     }
   };
@@ -240,9 +267,15 @@ const Admin = () => {
       setRoleData({
         user_email: "",
         role: "",
-      })
+      });
     }
   };
+
+  const handleDeleteSelect = (selected) => {
+    setDeleteProductList(selected);
+  };
+
+  const handleProductDelete = () => {};
 
   return (
     <div className="p-4 bg-white">
@@ -382,6 +415,35 @@ const Admin = () => {
           </button>
         )}
       </form>
+      <hr className="m-4" />
+      <div className="m-auto w-full max-w-[80%] shadow flex flex-col p-3 bg-white/70 ">
+        <label htmlFor="updateProducts">Delete Product/Products</label>
+        <Select
+          defaultValue={deleteProductList}
+          value={deleteProductList}
+          onChange={handleDeleteSelect}
+          options={deleteOptions}
+          isMulti
+          id="updateProducts"
+          closeMenuOnSelect={false}
+          allowSelectAll={true}
+        />
+        {loadingProductDelete ? (
+          <div className="flex flex-col justify-center items-center">
+            <GiHamburger
+              size="25"
+              className="animate-spin text-[rgb(233,142,30)]"
+            />
+          </div>
+        ) : (
+          <button
+            className="bg-[rgb(233,142,30)] hover:bg-orange-600 text-white text-lg font-medium p-1 rounded my-2 drop-shadow max-w-fit m-auto"
+            onClick={handleProductDelete}
+          >
+            Delete Selected products
+          </button>
+        )}
+      </div>
       <hr className="m-4" />
       <div className="m-auto w-full max-w-[80%] shadow flex flex-col p-3 bg-white/70">
         <label htmlFor="updateProducts">Update Products</label>

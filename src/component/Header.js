@@ -63,7 +63,7 @@ const Header = () => {
               {userData.image ? (
                 <img src={userData.image} className="h-full w-full" data-tooltip-id="my-tooltip" data-tooltip-content={userData.firstName} />
               ) : (
-                <HiOutlineUserCircle data-tooltip-id="my-tooltip" data-tooltip-content="User" />
+                <HiOutlineUserCircle data-tooltip-id="my-tooltip" data-tooltip-content={userData.firstName ? userData.firstName :"User"} />
               )}
             </div>
             {showMenu && (
@@ -77,7 +77,7 @@ const Header = () => {
                   </Link>
                 
 
-                {userData.image ? (
+                {userData.firstName ? (
                   <p
                     className="cursor-pointer text-white px-2 bg-[rgb(233,142,30)]"
                     onClick={handleLogout}
