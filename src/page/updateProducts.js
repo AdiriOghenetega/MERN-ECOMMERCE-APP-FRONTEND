@@ -12,6 +12,7 @@ const UpdateProducts = () => {
     const [loadingOff,setLoadingOff]=useState(false)
     const [loading,setLoading] = useState(false)
     const params = useParams()
+    const user = useSelector((state) => state.user);
 
     const {location} = params
 
@@ -41,7 +42,7 @@ console.log(updateList)
 
     const handleTurnOn = async()=>{
       setLoadingOn(true)
-        const fetchData = await fetch(`http://localhost:3001/product/turnonproduct`,{
+        const fetchData = await fetch(`http://localhost:3001/product/turnonproduct/${user._id}`,{
             method : "POST",
             headers : {
               "content-type" : "application/json"
@@ -64,7 +65,7 @@ console.log(updateList)
 
     const handleTurnOff = async()=>{
       setLoadingOff(true)
-        const fetchData = await fetch(`http://localhost:3001/product/turnoffproduct`,{
+        const fetchData = await fetch(`http://localhost:3001/product/turnoffproduct/${user._id}`,{
             method : "POST",
             headers : {
               "content-type" : "application/json"

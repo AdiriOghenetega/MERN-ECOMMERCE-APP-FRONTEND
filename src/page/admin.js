@@ -17,20 +17,26 @@ const Admin = () => {
     price: "",
     description: "",
     stores: [],
-  })
-
-  console.log(data)
+  });
 
   const [loading, setLoading] = useState(false);
 
   const [orderLoading, setOrderLoading] = useState(false);
 
+  const [roleLoading, setRoleLoading] = useState(false);
+
   const [location, setLocation] = useState("");
 
   const [count, setCount] = useState(0);
 
+  const [roleData, setRoleData] = useState({
+    user_email: "",
+    role: "",
+  });
+
+  
   const orderList = useSelector((state) => state.product.orderList);
- 
+  const user = useSelector((state) => state.user);
 
   const navigate = useNavigate();
 
@@ -45,15 +51,16 @@ const Admin = () => {
   useEffect(() => {
     (async () => {
       setOrderLoading(true);
-      const fetchOrders = await fetch(`http://localhost:3001/getorders`);
+      const fetchOrders = await fetch(`http://localhost:3001/getorders/${user?._id}`);
       const res = await fetchOrders.json();
 
       if (res) {
-        dispatch(setOrderData(res));
+        res.data && dispatch(setOrderData(res.data));
         setOrderLoading(false);
+        res.message && toast(res.message)
       }
     })();
-  },[]);
+  }, []);
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -67,11 +74,10 @@ const Admin = () => {
   };
 
   const handleSelect = (selected) => {
-    console.log(selected)
-    setData(prev => {
+    setData((prev) => {
       return {
         ...prev,
-        stores : selected,
+        stores: selected,
       };
     });
   };
@@ -95,7 +101,7 @@ const Admin = () => {
 
     if (name && image && category && price && stores) {
       setLoading(true);
-      const fetchData = await fetch(`http://localhost:3001/uploadProduct`, {
+      const fetchData = await fetch(`http://localhost:3001/uploadProduct/${user?._id}`, {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -144,7 +150,7 @@ const Admin = () => {
   const updateOrderStatus = async () => {
     setOrderLoading(true);
     const updateOrders = await fetch(
-      `http://localhost:3001/updateorder/${orderList[count]._id}`,
+      `http://localhost:3001/updateorder?order_id=${orderList[count]._id}&user_id=${user._id}`,
       {
         method: "PUT",
         headers: {
@@ -156,15 +162,35 @@ const Admin = () => {
     const res = await updateOrders.json();
 
     if (res) {
-      dispatch(setOrderData(res));
+      res.data && dispatch(setOrderData(res.data));
       setOrderLoading(false);
+      res.message && toast(res.message)
     }
   };
 
-  const deleteOrderList =async ()=>{
+  const deleteOrderList = async () => {
+    setOrderLoading(true);
+    const deleteOrder = await fetch(`http://localhost:3001/deleteall/${user?._id}`, {
+      method: "DELETE",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(orderList),
+    });
+    const res = await deleteOrder.json();
+
+    if (res) {
+      res.data && dispatch(setOrderData(res.data));
+      setOrderLoading(false);
+      window.location.reload(true);
+      res.message && toast(res.message)
+    }
+  };
+
+  const DeleteOrder = async () => {
     setOrderLoading(true);
     const deleteOrder = await fetch(
-      `http://localhost:3001/deleteall`,
+      `http://localhost:3001/deleteone?order_id=${orderList[count]._id}&user_id=${user._id}`,
       {
         method: "DELETE",
         headers: {
@@ -176,36 +202,89 @@ const Admin = () => {
     const res = await deleteOrder.json();
 
     if (res) {
-      dispatch(setOrderData(res));
+      res.data && dispatch(setOrderData(res.data));
       setOrderLoading(false);
-      window.location.reload(true)
+      res.message && toast(res.message)
+      window.location.reload(true);
     }
-  }
+  };
 
-  const DeleteOrder =async ()=>{
-    setOrderLoading(true);
-    const deleteOrder = await fetch(
-      `http://localhost:3001/deleteone/${orderList[count]._id}`,
+  const handleRoleChange = (e) => {
+    const { name, value } = e.target;
+
+    setRoleData((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
+  };
+
+  const handleRoleSubmit = async () => {
+    setRoleLoading(true);
+    const updateOrders = await fetch(
+      `http://localhost:3001/changeuserrole/${user._id}`,
       {
-        method: "DELETE",
+        method: "PUT",
         headers: {
           "content-type": "application/json",
         },
-        body: JSON.stringify(orderList),
+        body: JSON.stringify(roleData),
       }
     );
-    const res = await deleteOrder.json();
+    const res = await updateOrders.json();
 
     if (res) {
-      dispatch(setOrderData(res));
-      setOrderLoading(false);
-      window.location.reload(true)
+      toast(res.message);
+      setRoleLoading(false);
+      setRoleData({
+        user_email: "",
+        role: "",
+      })
     }
-  }
-
+  };
 
   return (
     <div className="p-4 bg-white">
+      <div className="m-auto w-full max-w-[80%] shadow flex flex-col p-3 bg-white/70">
+        <label htmlFor="user_email">User Email</label>
+        <input
+          type={"text"}
+          id="user_email"
+          name="user_email"
+          className="bg-slate-200 p-1 my-1"
+          onChange={handleRoleChange}
+          value={roleData.user_email}
+        />
+        <label htmlFor="role">Change user role</label>
+        <select
+          className="bg-slate-200 p-1 my-1"
+          id="role"
+          name="role"
+          onChange={handleRoleChange}
+          value={roleData.role}
+        >
+          <option>select category</option>
+          <option value={"admin"}>admin</option>
+          <option value={"user"}>user</option>
+        </select>
+        {roleLoading ? (
+          <div className="flex flex-col justify-center items-center mt-2">
+            <GiHamburger
+              size="25"
+              className="animate-spin text-[rgb(233,142,30)]"
+            />
+          </div>
+        ) : (
+          <button
+            className="bg-[rgb(233,142,30)] hover:bg-orange-600 text-white w-fit font-medium p-2 rounded my-2 drop-shadow m-auto"
+            onClick={handleRoleSubmit}
+          >
+            Change User Role
+          </button>
+        )}
+      </div>
+      <hr className="m-4" />
       <form
         className="m-auto w-full max-w-[80%] shadow flex flex-col p-3 bg-white/70"
         onSubmit={handleSubmit}
@@ -422,13 +501,14 @@ const Admin = () => {
               <h2 className="text-bold m-auto w-full mt-4 shadow flex flex-col p-3 bg-slate-300/70">
                 Order Status : {orderList[count]?.orderStatus}
               </h2>
-              {orderLoading ? <div className="flex flex-col justify-center items-center mt-2">
+              {orderLoading ? (
+                <div className="flex flex-col justify-center items-center mt-2">
                   <GiHamburger
                     size="25"
                     className="animate-spin text-[rgb(233,142,30)]"
                   />
                 </div>
-               : (
+              ) : (
                 orderList[count]?.orderStatus !== "Delivered" && (
                   <button
                     className="bg-[rgb(233,142,30)] hover:bg-orange-600 text-white font-medium p-2 w-fit rounded my-2 drop-shadow m-auto"
@@ -439,11 +519,11 @@ const Admin = () => {
                 )
               )}
               <button
-                    className="bg-[rgb(233,142,30)] hover:bg-orange-600 text-white font-medium p-2 w-fit rounded ml-2 my-2 drop-shadow m-auto"
-                    onClick={DeleteOrder}
-                  >
-                    Delete Order
-                  </button>
+                className="bg-[rgb(233,142,30)] hover:bg-orange-600 text-white font-medium p-2 w-fit rounded ml-2 my-2 drop-shadow m-auto"
+                onClick={DeleteOrder}
+              >
+                Delete Order
+              </button>
             </div>
           </div>
         ) : orderLoading ? (
