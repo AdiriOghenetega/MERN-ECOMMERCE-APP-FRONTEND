@@ -59,7 +59,7 @@ const Cart = () => {
           window.location.href = data.data.authorization_url
       }
       else{
-        toast("You have not Login!")
+        toast("You have to Login to continue purchase")
         setTimeout(()=>{
           navigate("/login")
         },1000)
