@@ -6,7 +6,7 @@ import { ImagetoBase64 } from "../utility/ImagetoBase64";
 import Select from "react-select";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setOrderData } from "../redux/productSlice";
+import { setOrderData, setDataProduct } from "../redux/productSlice";
 import { GrPrevious, GrNext } from "react-icons/gr";
 
 const Admin = () => {
@@ -207,7 +207,7 @@ const Admin = () => {
     const res = await deleteOrder.json();
 
     if (res) {
-      res.data && dispatch(setOrderData(res.data));
+      res.data && dispatch(setDataProduct(res.data));
       setOrderLoading(false);
       window.location.reload(true);
       res.message && toast(res.message);
@@ -275,7 +275,27 @@ const Admin = () => {
     setDeleteProductList(selected);
   };
 
-  const handleProductDelete = () => {};
+  const handleProductDelete = async () => {
+    setLoadingProductDelete(true);
+    const deleteProduct = await fetch(
+      `http://localhost:3001/deleteproduct/${user?._id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(deleteProductList),
+      }
+    );
+    const res = await deleteProduct.json();
+
+    if (res) {
+      res.data && dispatch(setOrderData(res.data));
+      setLoadingProductDelete(false);
+      window.location.reload(true);
+      res.message && toast(res.message);
+    }
+  };
 
   return (
     <div className="p-4 bg-white">
@@ -289,7 +309,7 @@ const Admin = () => {
           onChange={handleRoleChange}
           value={roleData.user_email}
         />
-        <label htmlFor="role">Change user role</label>
+        <label htmlFor="role">Change User Role</label>
         <select
           className="bg-slate-200 p-1 my-1"
           id="role"
@@ -297,7 +317,7 @@ const Admin = () => {
           onChange={handleRoleChange}
           value={roleData.role}
         >
-          <option>select category</option>
+          <option>Select Role</option>
           <option value={"admin"}>admin</option>
           <option value={"user"}>user</option>
         </select>
@@ -339,7 +359,7 @@ const Admin = () => {
           onChange={handleOnChange}
           value={data.category}
         >
-          <option>select category</option>
+          <option>Select Category</option>
           <option value={"soup"}>soup</option>
           <option value={"rice"}>rice</option>
           <option value={"salad"}>salad</option>
