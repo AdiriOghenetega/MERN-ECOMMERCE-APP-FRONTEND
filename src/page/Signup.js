@@ -57,7 +57,7 @@ function Signup() {
     if (firstName && email && password && confirmPassword && address) {
       if (password === confirmPassword) {
     setLoading(true)
-          const fetchData = await fetch(`${process.env.REACT_APP_BASE_URL}`,{
+          const fetchData = await fetch(`${process.env.REACT_APP_BASE_URL}/signup`,{
             method : "POST",
             headers : {
               "content-type" : "application/json"
