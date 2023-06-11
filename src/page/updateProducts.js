@@ -20,7 +20,7 @@ const UpdateProducts = () => {
     useEffect(() => {
       (async () => {
         setLoading(true)
-        const res = await fetch(`http://localhost:3001/product`, { credentials: "include" })
+        const res = await fetch(`${process.env.REACT_APP_BASE_URL}/product`, { credentials: "include" })
         const resData = await res.json()
         console.log(resData)
         setProductData(resData)
@@ -43,7 +43,7 @@ console.log(updateList)
 
     const handleTurnOn = async()=>{
       setLoadingOn(true)
-        const fetchData = await fetch(`http://localhost:3001/product/turnonproduct/${user._id}`,{
+        const fetchData = await fetch(`${process.env.REACT_APP_BASE_URL}/product/turnonproduct/${user._id}`,{
             method : "POST",
             headers : {
               "content-type" : "application/json"
@@ -66,7 +66,7 @@ console.log(updateList)
 
     const handleTurnOff = async()=>{
       setLoadingOff(true)
-        const fetchData = await fetch(`http://localhost:3001/product/turnoffproduct/${user._id}`,{
+        const fetchData = await fetch(`${process.env.REACT_APP_BASE_URL}/product/turnoffproduct/${user._id}`,{
             method : "POST",
             headers : {
               "content-type" : "application/json"

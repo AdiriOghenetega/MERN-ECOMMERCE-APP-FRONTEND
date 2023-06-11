@@ -13,7 +13,6 @@ import {
 import Intro from "./page/intro"
 import Menu from "./page/menu";
 import Product from "./page/product";
-import About from "./page/About";
 import Contact from "./page/Contact";
 import Login from "./page/login";
 import Admin from "./page/admin";
@@ -33,7 +32,6 @@ const router = createBrowserRouter(
       <Route index element={<Intro />} />
       <Route path="menu/:location" element={<Menu />} />
       <Route path="product/:filterby" element={<Product />} />
-      <Route path="about" element={<About />} />
       <Route path="contact" element={<Contact />} />
       <Route path="login" element={<Login />} />
       <Route path="admin" element={<Admin />} />

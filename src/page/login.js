@@ -46,7 +46,7 @@ const Login = () => {
     const {email,password} = data
     if(email && password ){
       setLoading(true)
-      const fetchData = await fetch(`http://localhost:3001/login`,{
+      const fetchData = await fetch(`${process.env.REACT_APP_BASE_URL}/login`,{
         method : "POST",
         headers : {
           "content-type" : "application/json"

@@ -1,12 +1,14 @@
-import React from "react";
+import React,{useState} from "react";
 import { useSelector,useDispatch } from "react-redux";
 import CartProduct from "../component/cartProduct";
 import emptyCartImage from "../assets/empty-cart.gif"
 import { toast } from "react-hot-toast";
 import {setCartData} from "../redux/productSlice"
 import { Link, useNavigate } from "react-router-dom";
+import { GiHamburger } from "react-icons/gi";
 
 const Cart = () => {
+  const [paymentLoading,setPaymentLoading]=useState(false)
   const productCartItem = useSelector((state) => state.product.cartItem);
   const user = useSelector(state => state.user)
   const navigate = useNavigate()
@@ -25,14 +27,14 @@ const Cart = () => {
   
   
   const handlePayment = async()=>{
-console.log(user)
       if(user.email){
-          const res = await fetch(`http://localhost:3001/payment?amount=${totalPrice}&id=${user._id}`)
+        setPaymentLoading(true)
+          const res = await fetch(`${process.env.REACT_APP_BASE_URL}/payment?amount=${totalPrice}&id=${user._id}`)
 
           const data = await res.json()
           console.log(data)
 
-          const orderRes = await fetch(`http://localhost:3001/createorder`,{
+          const orderRes = await fetch(`${process.env.REACT_APP_BASE_URL}/createorder`,{
         method : "POST",
         headers : {
           "content-type" : "application/json"
@@ -51,8 +53,9 @@ console.log(user)
 
       const orderData = await orderRes.json()
       console.log(orderData)
-          dispatch(setCartData([]))
-          toast("Redirect to payment Gateway...!")
+      setPaymentLoading(false)
+      toast("Redirect to payment Gateway...!")
+      dispatch(setCartData([]))
           window.location.href = data.data.authorization_url
       }
       else{
@@ -101,12 +104,19 @@ console.log(user)
             <div className="flex w-full py-2 text-lg border-b">
               <p>Total Price</p>
               <p className="ml-auto w-32 font-bold">
-                <span className="text-red-500">₦</span> {totalPrice}
+                <span className="text-green-500">₦</span> {totalPrice}
               </p>
             </div>
-            <button className="bg-red-500 w-full text-lg font-bold py-2 text-white" onClick={handlePayment}>
+            {paymentLoading ? (
+          <div className="flex flex-col justify-center items-center mt-2">
+            <GiHamburger
+              size="25"
+              className="animate-spin text-[rgb(233,142,30)]"
+            />
+          </div>
+        ) :<button className="bg-[rgb(233,142,30)] hover:bg-orange-600 w-full text-lg font-bold py-2 text-white" onClick={handlePayment}>
               Payment
-            </button>
+            </button>}
           </div>
         </div>
 

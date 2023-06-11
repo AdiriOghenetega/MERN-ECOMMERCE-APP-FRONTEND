@@ -33,7 +33,7 @@ const CardFeature = ({ image, name, price, category, loading, id }) => {
             </h3>
             <p className=" text-slate-500  font-medium">{category}</p>
             <p className=" font-bold">
-              <span className="text-red-500">₦</span>
+              <span className="text-green-500">₦</span>
               <span>{price}</span>
             </p>
           </Link>

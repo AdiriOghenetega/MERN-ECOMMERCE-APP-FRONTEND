@@ -18,7 +18,7 @@ function App() {
   useEffect(() => {
     if (location) {
       (async () => {
-        const res = await fetch(`http://localhost:3001/product`, {
+        const res = await fetch(`${process.env.REACT_APP_BASE_URL}/product`, {
           credentials: "include",
         });
         const resData = await res.json();
@@ -60,7 +60,7 @@ function App() {
       const retrievedUser = localStorage.getItem("user");
       if (retrievedUser) {
         const res = await fetch(
-          `http://localhost:3001/user/${JSON.parse(retrievedUser)}`
+          `${process.env.REACT_APP_BASE_URL}/user/${JSON.parse(retrievedUser)}`
         );
         const resData = await res.json();
         dispatch(loginRedux(resData));
@@ -92,7 +92,7 @@ function App() {
       //send or update user cart database in server
       (async () => {
         const res = await fetch(
-          `http://localhost:3001/updatecart/${JSON.parse(user)}`,
+          `${process.env.REACT_APP_BASE_URL}/updatecart/${JSON.parse(user)}`,
           {
             method: "PUT",
             headers: {

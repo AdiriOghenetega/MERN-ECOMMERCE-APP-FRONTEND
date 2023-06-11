@@ -50,7 +50,7 @@ const Admin = () => {
   useEffect(() => {
     (async () => {
       setLoading(true);
-      const res = await fetch(`http://localhost:3001/product`, {
+      const res = await fetch(`${process.env.REACT_APP_BASE_URL}/product`, {
         credentials: "include",
       });
       const resData = await res.json();
@@ -62,7 +62,7 @@ const Admin = () => {
   useEffect(() => {
     (async () => {
       setOrderLoading(true);
-      const fetchOrders = await fetch(`http://localhost:3001/getorders`);
+      const fetchOrders = await fetch(`${process.env.REACT_APP_BASE_URL}/getorders`);
       const res = await fetchOrders.json();
 
       if (res) {
@@ -123,7 +123,7 @@ const Admin = () => {
     if (name && image && category && price && stores) {
       setLoading(true);
       const fetchData = await fetch(
-        `http://localhost:3001/uploadProduct/${user?._id}`,
+        `${process.env.REACT_APP_BASE_URL}/uploadProduct/${user?._id}`,
         {
           method: "POST",
           headers: {
@@ -174,7 +174,7 @@ const Admin = () => {
   const updateOrderStatus = async () => {
     setOrderLoading(true);
     const updateOrders = await fetch(
-      `http://localhost:3001/updateorder?order_id=${orderList[count]._id}&user_id=${user._id}`,
+      `${process.env.REACT_APP_BASE_URL}/updateorder?order_id=${orderList[count]._id}&user_id=${user._id}`,
       {
         method: "PUT",
         headers: {
@@ -195,7 +195,7 @@ const Admin = () => {
   const deleteOrderList = async () => {
     setOrderLoading(true);
     const deleteOrder = await fetch(
-      `http://localhost:3001/deleteall/${user?._id}`,
+      `${process.env.REACT_APP_BASE_URL}/deleteall/${user?._id}`,
       {
         method: "DELETE",
         headers: {
@@ -217,7 +217,7 @@ const Admin = () => {
   const DeleteOrder = async () => {
     setOrderLoading(true);
     const deleteOrder = await fetch(
-      `http://localhost:3001/deleteone?order_id=${orderList[count]._id}&user_id=${user._id}`,
+      `${process.env.REACT_APP_BASE_URL}/deleteone?order_id=${orderList[count]._id}&user_id=${user._id}`,
       {
         method: "DELETE",
         headers: {
@@ -250,7 +250,7 @@ const Admin = () => {
   const handleRoleSubmit = async () => {
     setRoleLoading(true);
     const updateOrders = await fetch(
-      `http://localhost:3001/changeuserrole/${user._id}`,
+      `${process.env.REACT_APP_BASE_URL}/changeuserrole/${user._id}`,
       {
         method: "PUT",
         headers: {
@@ -278,7 +278,7 @@ const Admin = () => {
   const handleProductDelete = async () => {
     setLoadingProductDelete(true);
     const deleteProduct = await fetch(
-      `http://localhost:3001/deleteproduct/${user?._id}`,
+      `${process.env.REACT_APP_BASE_URL}/deleteproduct/${user?._id}`,
       {
         method: "DELETE",
         headers: {
@@ -405,6 +405,7 @@ const Admin = () => {
         <label htmlFor="stores">Available Stores</label>
         <Select
           defaultValue={data.stores}
+          value={data.stores}
           onChange={handleSelect}
           options={options}
           isMulti

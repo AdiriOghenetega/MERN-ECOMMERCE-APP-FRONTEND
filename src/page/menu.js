@@ -17,9 +17,8 @@ const Menu = () => {
   );
   const continentalDishes = productData.filter(
     (el) =>
-      el.category.toLowerCase() === "rice" ||
-      el.category.toLowerCase() === "others" ||
-      el.category.toLowerCase() === "salad"
+      (el.category.toLowerCase() === "rice" && el._id === "6485e67ac0be913b526600cb") ||
+      el.category.toLowerCase() === "salad" 
   );
 
   const loading = new Array(10).fill(null);

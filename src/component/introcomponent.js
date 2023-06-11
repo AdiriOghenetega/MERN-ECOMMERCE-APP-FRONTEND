@@ -23,7 +23,7 @@ const IntroComponent = ({closed}) => {
       (async () => {
         setLoading(true)
         localStorage.removeItem("location");
-        const res = await fetch(`http://localhost:3001/product`, { credentials: "include" })
+        const res = await fetch(`${process.env.REACT_APP_BASE_URL}/product`, { credentials: "include" })
         const resData = await res.json()
         console.log(resData)
         const availProducts = resData.filter(el => el.stores.includes(ltn))
