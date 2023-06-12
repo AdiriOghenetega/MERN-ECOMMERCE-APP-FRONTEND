@@ -11,7 +11,7 @@ const Success = () => {
       <div className="flex flex-col justify-center items-center">
       <Link to={`/menu/${location}`}>
         <button className="w-full max-w-[150px] m-auto  bg-[rgb(233,142,30)] hover:bg-orange-600 cursor-pointer text-white text-center p-2 rounded mt-4">
-          Start Shopping
+          Continue Shopping
         </button>
       </Link>
       </div>

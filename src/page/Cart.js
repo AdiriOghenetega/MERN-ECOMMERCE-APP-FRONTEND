@@ -32,7 +32,6 @@ const Cart = () => {
           const res = await fetch(`${process.env.REACT_APP_BASE_URL}/payment?amount=${totalPrice}&id=${user._id}`)
 
           const data = await res.json()
-          console.log(data)
 
           const orderRes = await fetch(`${process.env.REACT_APP_BASE_URL}/createorder`,{
         method : "POST",
