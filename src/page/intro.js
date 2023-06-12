@@ -41,7 +41,7 @@ const [showModal,setShowModal] = useState(false)
       <hr className="w-[80%] m-4" />
       <div className="flex flex-col justify-center items-center max-h-auto md:max-h-[400px] w-full">
         <h1 className='text-3xl text-[rgb(233,142,30)] p-2 drop-shadow-lg'>how to order</h1>
-        <div className="flex flex-col md:flex-row justify-center gap-3 md:gap-0 md:justify-evenly items-center mt-5 w-full">
+        <div className="flex flex-col md:flex-row justify-center md:gap-3 md:gap-0 md:justify-evenly items-center mt-5 w-full">
           <div className="flex flex-col justify-start items-center border-2 p-2 drop-shadow h-[300px] bg-[rgb(255,255,255,.8)] min-w-[80%] md:min-w-0">
             <div className="flex flex-col justify-center my-10 items-center text-[rgb(233,142,30)] animate-bounce">
               <MdShareLocation size="100px" />
@@ -54,7 +54,7 @@ const [showModal,setShowModal] = useState(false)
               location.
             </h3>
           </div>
-          <div className="flex flex-col justify-start items-center border-2 p-2 drop-shadow h-[300px] bg-[rgb(255,255,255,.8)] min-w-[80%] md:min-w-0">
+          <div className="flex flex-col justify-start items-center border-2 p-2 drop-shadow h-[300px] bg-[rgb(255,255,255,.8)] min-w-[80%] md:min-w-0 mt-2">
             <div className="flex flex-col justify-center my-10 items-center text-[rgb(233,142,30)] animate-bounce">
               <MdFoodBank size="100px" />
             </div>
@@ -66,7 +66,7 @@ const [showModal,setShowModal] = useState(false)
               menu.
             </h3>
           </div>
-          <div className="flex flex-col justify-start items-center border-2 p-2 drop-shadow h-[300px] bg-[rgb(255,255,255,.8)] min-w-[80%] md:min-w-0">
+          <div className="flex flex-col justify-start items-center border-2 p-2 drop-shadow h-[300px] bg-[rgb(255,255,255,.8)] min-w-[80%] md:min-w-0 mt-2">
             <div className="flex flex-col justify-center my-10 items-center text-[rgb(233,142,30)] animate-bounce">
               <IoFastFoodOutline size="100px" />
             </div>
