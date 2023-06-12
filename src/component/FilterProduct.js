@@ -18,7 +18,7 @@ const FilterProduct = ({ category, onClick, isActive }) => {
   }
 
   return (
-    <div onClick={onClick}>
+    <div onClick={onClick} className="w-full ml-2 relative">
     <Tooltip id="my-tooltip" />
       <div className={`text-3xl p-5  rounded-full cursor-pointer ${isActive ? "bg-red-600 text-white" : "bg-[rgb(233,142,30)]"}`} data-tooltip-id="my-tooltip" data-tooltip-content={category}>
         {catIcon[category]}

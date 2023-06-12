@@ -18,7 +18,7 @@ const CardFeature = ({ image, name, price, category, loading, id }) => {
   };
 
   return (
-    <div className={`w-full min-w-[200px] max-w-[200px] bg-[rgb(255,255,255,.8)] hover:shadow-lg drop-shadow-lg py-5 px-4 cursor-pointer flex flex-col ${loading && "animate-pulse"}`}>
+    <div className={`w-full mt-2 min-w-[200px] max-w-[200px] bg-[rgb(255,255,255,.8)] hover:shadow-lg drop-shadow-lg py-5 px-4 cursor-pointer flex flex-col ${loading && "animate-pulse"}`}>
       {image ? (
         <>
           <Link

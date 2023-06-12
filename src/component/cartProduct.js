@@ -31,7 +31,7 @@ const CartProduct = ({ id, name, image, category, qty, total, price }) => {
             <button onClick={()=>dispatch(increaseQty(id))} className="bg-slate-300 py-1 mt-2 rounded hover:bg-slate-400 p-1 ">
               <TbPlus />
             </button>
-            <p className="font-semibold md:p-1">{qty}</p>
+            <p className="font-semibold mx-2 md:p-1">{qty}</p>
             <button
               onClick={()=>dispatch(decreaseQty(id))}
               className="bg-slate-300 py-1 mt-2 rounded hover:bg-slate-400 p-1 "

@@ -38,9 +38,9 @@ const Product = () => {
             <span className="text-green-500 ">₦</span>
             <span>{productDisplay?.price}</span>
           </p>
-          <div className="flex gap-3">
+          <div className="flex md:gap-3">
           <button onClick={handleBuy} className="bg-[rgb(233,142,30)] py-1 mt-2 rounded hover:bg-orange-600 min-w-[100px]">Buy</button>
-          <button onClick={handleAddCartProduct} className="bg-[rgb(233,142,30)] py-1 mt-2 rounded hover:bg-orange-600 min-w-[100px]">Add Cart</button>
+          <button onClick={handleAddCartProduct} className="bg-[rgb(233,142,30)] py-1 mt-2 rounded hover:bg-orange-600 min-w-[100px] ml-2">Add Cart</button>
           </div>
           <div>
             <p className="text-slate-600 font-medium">Description : </p>

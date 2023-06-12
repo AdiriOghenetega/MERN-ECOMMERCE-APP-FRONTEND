@@ -31,8 +31,7 @@ const AllProduct = ({ heading }) => {
   return (
     <div className="my-5 flex flex-col w-full items-center">
       <h2 className="font-bold text-2xl text-[rgb(233,142,30)] mb-4 bg-[rgb(255,255,255,.8)] p-2 rounded w-auto">{heading}</h2>
-
-      <div className="flex gap-4 justify-center overflow-scroll scrollbar-none">
+      <div className="flex md:gap-5 overflow-scroll scroll-smooth scrollbar-none transition-all max-w-full py-2">
         {categoryList[0] ? (
           categoryList.map((el) => {
             return (
@@ -51,7 +50,7 @@ const AllProduct = ({ heading }) => {
         )}
       </div>
 
-      <div className="flex flex-wrap justify-center gap-4 my-4">
+      <div className="flex flex-wrap justify-center md:gap-4 my-4">
         {dataFilter[0]
           ? dataFilter.map((el) => {
               return (

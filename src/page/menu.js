@@ -54,7 +54,7 @@ const Menu = () => {
           <h2 className="font-bold text-2xl text-[rgb(233,142,30)] mb-4 bg-[rgb(255,255,255,.8)] p-2 rounded">
             Snacks and Pastries
           </h2>
-          <div className="ml-auto flex gap-4">
+          <div className="ml-auto flex">
             <button
               onClick={prevSnack}
               className="bg-slate-300 hover:bg-slate-400 text-lg  p-1 rounded"
@@ -63,7 +63,7 @@ const Menu = () => {
             </button>
             <button
               onClick={nextSnack}
-              className="bg-slate-300 hover:bg-slate-400 text-lg p-1 rounded "
+              className="bg-slate-300 hover:bg-slate-400 text-lg p-1 rounded ml-2"
             >
               <GrNext />
             </button>
@@ -96,7 +96,7 @@ const Menu = () => {
           <h2 className="font-bold text-2xl text-[rgb(233,142,30)] mb-4 bg-[rgb(255,255,255,.8)] p-2 rounded">
             Local Dishes
           </h2>
-          <div className="ml-auto flex gap-4">
+          <div className="ml-auto flex">
             <button
               onClick={prevLocal}
               className="bg-slate-300 hover:bg-slate-400 text-lg  p-1 rounded"
@@ -105,7 +105,7 @@ const Menu = () => {
             </button>
             <button
               onClick={nextLocal}
-              className="bg-slate-300 hover:bg-slate-400 text-lg p-1 rounded "
+              className="bg-slate-300 hover:bg-slate-400 text-lg p-1 rounded ml-2"
             >
               <GrNext />
             </button>
@@ -138,7 +138,7 @@ const Menu = () => {
           <h2 className="font-bold text-2xl text-[rgb(233,142,30)] mb-4 bg-[rgb(255,255,255,.8)] p-2 rounded">
             Continental Dishes
           </h2>
-          <div className="ml-auto flex gap-4">
+          <div className="ml-auto flex">
             <button
               onClick={prevContinental}
               className="bg-slate-300 hover:bg-slate-400 text-lg  p-1 rounded"
@@ -147,7 +147,7 @@ const Menu = () => {
             </button>
             <button
               onClick={nextContinental}
-              className="bg-slate-300 hover:bg-slate-400 text-lg p-1 rounded "
+              className="bg-slate-300 hover:bg-slate-400 text-lg p-1 rounded ml-2"
             >
               <GrNext />
             </button>
@@ -175,8 +175,10 @@ const Menu = () => {
               ))}
         </div>
       </div>
-
+      
+      
       <AllProduct heading={"Menu List"} />
+      
     </div>
   );
 };
