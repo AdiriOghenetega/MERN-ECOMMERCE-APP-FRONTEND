@@ -54,7 +54,7 @@ const [showModal,setShowModal] = useState(false)
               location.
             </h3>
           </div>
-          <div className="flex flex-col justify-start items-center border-2 p-2 drop-shadow h-[300px] bg-[rgb(255,255,255,.8)] min-w-[80%] md:min-w-0 mt-2">
+          <div className="flex flex-col justify-start items-center border-2 p-2 drop-shadow h-[300px] bg-[rgb(255,255,255,.8)] min-w-[80%] md:min-w-0 mt-4">
             <div className="flex flex-col justify-center my-10 items-center text-[rgb(233,142,30)] animate-bounce">
               <MdFoodBank size="100px" />
             </div>
@@ -66,7 +66,7 @@ const [showModal,setShowModal] = useState(false)
               menu.
             </h3>
           </div>
-          <div className="flex flex-col justify-start items-center border-2 p-2 drop-shadow h-[300px] bg-[rgb(255,255,255,.8)] min-w-[80%] md:min-w-0 mt-2">
+          <div className="flex flex-col justify-start items-center border-2 p-2 drop-shadow h-[300px] bg-[rgb(255,255,255,.8)] min-w-[80%] md:min-w-0 mt-4">
             <div className="flex flex-col justify-center my-10 items-center text-[rgb(233,142,30)] animate-bounce">
               <IoFastFoodOutline size="100px" />
             </div>

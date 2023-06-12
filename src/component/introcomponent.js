@@ -25,7 +25,7 @@ const IntroComponent = ({closed}) => {
         localStorage.removeItem("location");
         const res = await fetch(`${process.env.REACT_APP_BASE_URL}/product`, { credentials: "include" })
         const resData = await res.json()
-        console.log(resData)
+        
         const availProducts = resData.filter(el => el.stores.includes(ltn))
         dispatch(setDataProduct(availProducts))
         dispatch(setCartData([]))
