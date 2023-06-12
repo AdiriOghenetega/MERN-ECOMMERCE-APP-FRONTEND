@@ -11,6 +11,7 @@ import { logoutRedux } from "../redux/userSlice";
 import { toast } from "react-hot-toast";
 import { Tooltip } from 'react-tooltip'
 import { useLocation } from 'react-router-dom';
+import { useMediaQuery } from 'react-responsive'
 
 const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -18,7 +19,9 @@ const Header = () => {
   const dispatch = useDispatch();
   const location = localStorage.getItem("location")
   const currentRoute = useLocation()
-  console.log(currentRoute.pathname)
+  
+  const isMobile = useMediaQuery({ query: '(max-width: 767px)' })
+
 
   const handleShowMenu = () => {
     setShowMenu((prev) => !prev);
@@ -46,13 +49,13 @@ const Header = () => {
 
         <div className="flex items-center gap-4 md:gap-7">
           <nav className="gap-4 md:gap-6 text-base md:text-lg hidden md:flex">
-            <Link to={""}><IoHome size="25px" className="text-[rgb(233,142,30)]" data-tooltip-id="my-tooltip" data-tooltip-content="Home" /> </Link>
-            {(currentRoute.pathname === "/" || currentRoute.pathname === `/menu/${location}`) ? null: <Link to={`menu/${location}`}><BiFoodMenu className="text-[rgb(233,142,30)]" size="25px" data-tooltip-id="my-tooltip" data-tooltip-content="Menu" /></Link>}
-            <Link to={"contact"}><GrContact size="25px" data-tooltip-id="my-tooltip" data-tooltip-content="Contact us" /></Link>
+            <Link to={""}><IoHome size="25px" className="text-[rgb(233,142,30)]" data-tooltip-id="my-tooltip" data-tooltip-content="Home" data-tooltip-hidden={isMobile && true} /> </Link>
+            {(currentRoute.pathname === "/" || currentRoute.pathname === `/menu/${location}`) ? null: <Link to={`menu/${location}`}><BiFoodMenu className="text-[rgb(233,142,30)]" size="25px" data-tooltip-id="my-tooltip" data-tooltip-content="Menu" data-tooltip-hidden={isMobile && true} /></Link>}
+            <Link to={"contact"}><GrContact size="25px" data-tooltip-id="my-tooltip" data-tooltip-content="Contact us" data-tooltip-hidden={isMobile && true} /></Link>
           </nav>
          <div className={`text-2xl text-slate-600 relative ${(currentRoute.pathname === "/") && "pointer-events-none"}`}>
             <Link to={"cart"}>
-              <BsCartFill data-tooltip-id="my-tooltip" data-tooltip-content="Cart" />
+              <BsCartFill data-tooltip-id="my-tooltip" data-tooltip-content="Cart" data-tooltip-hidden={isMobile && true} />
               <div className="absolute -top-1 -right-1 text-white bg-[rgb(233,142,30)] h-4 w-4 rounded-full m-0 p-0 text-sm flex flex-col justify-center items-center ">
                 {cartItemNumber.length}
               </div>
@@ -61,9 +64,9 @@ const Header = () => {
           <div className="ml-2 text-slate-600" onClick={handleShowMenu}>
             <div className="text-3xl cursor-pointer w-8 h-8 rounded-full overflow-hidden drop-shadow-md text-[rgb(233,142,30)]">
               {userData.image ? (
-                <img src={userData.image} className="h-full w-full" data-tooltip-id="my-tooltip" data-tooltip-content={userData.firstName} />
+                <img src={userData.image} className="h-full w-full" data-tooltip-id="my-tooltip" data-tooltip-content={userData.firstName} data-tooltip-hidden={isMobile && true} />
               ) : (
-                <HiOutlineUserCircle data-tooltip-id="my-tooltip" data-tooltip-content={userData.firstName ? userData.firstName :"User"} />
+                <HiOutlineUserCircle data-tooltip-id="my-tooltip" data-tooltip-content={userData.firstName ? userData.firstName :"User"} data-tooltip-hidden={isMobile && true} />
               )}
             </div>
             {showMenu && (

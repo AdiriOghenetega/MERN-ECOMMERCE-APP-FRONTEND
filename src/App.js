@@ -34,7 +34,7 @@ function App() {
             let productDetails = availProducts.filter(
               (elem) => elem._id === item._id
             );
-            console.log(productDetails);
+            
 
             return {
               _id: productDetails[0]._id,
@@ -47,7 +47,7 @@ function App() {
               total: item.total,
             };
           });
-          console.log(populatedData);
+          
           dispatch(setCartData(populatedData));
         }
       })();
