@@ -58,7 +58,7 @@ const Header = () => {
               </div>
             </Link>
           </div>
-          <div className=" text-slate-600" onClick={handleShowMenu}>
+          <div className="ml-2 text-slate-600" onClick={handleShowMenu}>
             <div className="text-3xl cursor-pointer w-8 h-8 rounded-full overflow-hidden drop-shadow-md text-[rgb(233,142,30)]">
               {userData.image ? (
                 <img src={userData.image} className="h-full w-full" data-tooltip-id="my-tooltip" data-tooltip-content={userData.firstName} />
