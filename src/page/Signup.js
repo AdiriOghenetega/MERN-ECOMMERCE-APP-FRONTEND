@@ -74,7 +74,7 @@ function Signup() {
         }
        
       } else {
-        alert("password and confirm password not equal");
+        alert("password and confirm password does not match");
       }
     } else {
       alert("Please Enter required fields");
@@ -82,8 +82,8 @@ function Signup() {
   };
 
   return (
-    <div className="p-3 md:p-4 bg-white">
-      <div className="w-full max-w-sm bg-white/70 m-auto flex  flex-col p-4">
+    <div className="p-3 md:p-4 bg-white min-h-[%100]">
+      <div className="w-full max-w-sm bg-white/70 m-auto flex flex-col p-4">
         <div className="w-20 h-20 overflow-hidden rounded-full drop-shadow-md shadow-md m-auto relative  ">
           <img src={data.image ? data.image :  loginSignupImage} className="w-full h-full" />
 

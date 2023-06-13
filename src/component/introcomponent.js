@@ -37,7 +37,7 @@ const IntroComponent = ({closed}) => {
     
   return (
     <div className='flex flex-col justify-center items-center'>
-    <h1 className='text-5xl text-extrabold w-[100%] border-2 text-[rgb(233,142,30)] p-16 drop-shadow-lg'>Enjoy tasty meals,<br />wherever you are </h1>
+    <h1 className='text-5xl text-extrabold w-[100%] border-2 text-slate-200 md:text-[rgb(233,142,30)] p-16 drop-shadow-lg'>Enjoy tasty meals,<br />wherever you are </h1>
     <div className='flex flex-col justify-center items-center p-4'>
         <label htmlFor='location'>Select restaurant closest to you :</label>
         <select id="location" name="location" onChange={handleChange} className={`bg-slate-200 px-2 py-1 my-1 w-52 rounded ${closed && "pointer-events-none"}`}>
