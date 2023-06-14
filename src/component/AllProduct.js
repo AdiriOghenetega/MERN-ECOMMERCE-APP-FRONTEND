@@ -4,16 +4,28 @@ import CardFeature from "./CardFeature";
 import FilterProduct from "./FilterProduct";
 import {GiHamburger} from "react-icons/gi"
 
-const AllProduct = ({ heading }) => {
+const AllProduct = ({ heading,selectedCategory }) => {
   const productData = useSelector((state) => state.product.productList);
-  const categoryList = [...new Set(productData.map((el) => el.category))];
+  let categoryList = [...new Set(productData.map((el) => el.category))];
 
   //filter data display
   const [filterby, setFilterBy] = useState("");
   const [dataFilter, setDataFilter] = useState([]);
 
+  let relatedProducts = []
+  let relatedCategory = []
+  if(selectedCategory){
+    relatedProducts = productData.filter(el=>el.category.toLowerCase() === selectedCategory.toLowerCase())
+    relatedCategory = categoryList.filter(el=>el.toLowerCase() === selectedCategory.toLowerCase())
+    categoryList = relatedCategory
+  }
+
   useEffect(() => {
-    setDataFilter(productData);
+    if(selectedCategory){
+      setDataFilter(relatedProducts)
+    }else{
+      setDataFilter(productData);
+    }
   }, [productData]);
 
   const handleFilterProduct = (category) => {

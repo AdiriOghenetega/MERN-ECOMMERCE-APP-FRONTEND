@@ -49,7 +49,7 @@ const Product = () => {
         </div>
       </div>
 
-      <AllProduct heading={"Related Products"}/>
+      <AllProduct heading={"Related Products"} selectedCategory={productDisplay?.category} />
     </div>
   );
 };

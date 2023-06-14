@@ -91,7 +91,7 @@ const Menu = () => {
               ))}
         </div>
       </div>
-      <div className="mt-4">
+      <div className="mt-8">
         <div className="flex w-full items-center">
           <h2 className="font-bold text-2xl text-[rgb(233,142,30)] mb-4 bg-[rgb(255,255,255,.8)] p-2 rounded">
             Local Dishes
@@ -133,7 +133,7 @@ const Menu = () => {
               ))}
         </div>
       </div>
-      <div className="mt-4">
+      <div className="mt-8">
         <div className="flex w-full items-center">
           <h2 className="font-bold text-2xl text-[rgb(233,142,30)] mb-4 bg-[rgb(255,255,255,.8)] p-2 rounded">
             Continental Dishes
