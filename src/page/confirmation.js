@@ -18,7 +18,7 @@ const Confirmation = () => {
   return (
     <div>
       <h3>Click the "paid" button to confirm purchase</h3>
-      {loading ? <div className='flex flex-col justify-center items-center'><GiHamburger size="25" className='animate-spin text-[rgb(233,142,30)]' /></div>:<button className={`bg-[rgb(233,142,30)] hover:bg-orange-600 text-white text-lg font-medium p-1 rounded my-2 drop-shadow ${closed && "pointer-events-none"}`} onClick={handleVerifyTransaction}>Go</button>}
+      {loading ? <div className='flex flex-col justify-center items-center'><GiHamburger size="25" className='animate-spin text-[rgb(233,142,30)]' /></div>:<button className={`bg-[rgb(233,142,30)] hover:bg-orange-600 text-white text-lg font-medium p-1 rounded my-2 drop-shadow`} onClick={handleVerifyTransaction}>Go</button>}
     </div>
   )
 }
