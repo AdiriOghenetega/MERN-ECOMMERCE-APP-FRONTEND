@@ -42,7 +42,7 @@ const Cart = () => {
           amount:totalPrice,
           userID:user._id,
           method: "online",
-          payment_status:"paid",
+          payment_status:"pending",
           order_status: "pending",
           reference: data?.data?.reference,
           cartData:productCartItem,
@@ -62,8 +62,7 @@ const Cart = () => {
         setTimeout(()=>{
           navigate("/login")
         },1000)
-      }
-    
+      } 
   }
   return (
     <div className="bg-white h-[calc(100vh-4rem)] ">

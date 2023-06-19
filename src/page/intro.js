@@ -93,8 +93,8 @@ const Intro = () => {
         </div>
       </div>
       <hr className="w-[80%] m-8" />
-      <div className="h-[400px] w-full flex flex-col justify-center items-center relative">
-        <div className="md:bg-gradient-to-r md:from-[rgb(233,142,30)] bg-[rgb(233,142,30)] h-[300px] w-full p-10 flex flex-col justify-between">
+      <div className="h-[500px] w-full flex flex-col justify-center items-center relative">
+        <div className="bg-[rgb(233,142,30)] h-[300px] w-full p-10 flex flex-col justify-between">
           <h3 className="text-white text-sm md:text-lg text-bold md:w-[450px]">
             With the HcueEats App, anyone can simply use a mobile device to look
             over our numerous delicacies. All you need to do is to place an
