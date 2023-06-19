@@ -7,9 +7,9 @@ const Confirmation = () => {
 
  let search = window.location.search
  let params = new URLSearchParams(search)
- let getParams = params.get("query")
+ let txReference = params.get("trxref")
 
- console.log(getParams)
+ console.log(txReference)
 
   const handleVerifyTransaction = async()=>{
     // const res = await fetch(`${process.env.REACT_APP_BASE_URL}/verifypayment?reference=${reference}`)
