@@ -12,9 +12,9 @@ const Confirmation = () => {
  console.log(txReference)
 
   const handleVerifyTransaction = async()=>{
-    // const res = await fetch(`${process.env.REACT_APP_BASE_URL}/verifypayment?reference=${reference}`)
-    // const data = await res.json()
-    // console.log(data)
+    const res = await fetch(`${process.env.REACT_APP_BASE_URL}/verifypayment?reference=${txReference}`)
+    const data = await res.json()
+    console.log(data)
   }
 
   return (
