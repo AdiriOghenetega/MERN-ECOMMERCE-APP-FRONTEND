@@ -12,12 +12,15 @@ const IntroComponent = ({closed}) => {
     const [ltn,setLtn] = useState("")
     const [loading,setLoading] = useState(false)
 
+    const location = localStorage.getItem("location");
+
     function handleChange(event){
         const {value} = event.target
         
         setLtn(value)
         
     }
+
 
     function handleSubmit(){
       (async () => {
@@ -28,7 +31,9 @@ const IntroComponent = ({closed}) => {
         
         const availProducts = resData.filter(el => el.stores.includes(ltn))
         dispatch(setDataProduct(availProducts))
-        dispatch(setCartData([]))
+        if (location?.toLowerCase() !== ltn?.toLowerCase()) {
+          dispatch(setCartData([]));
+        }
         localStorage.setItem("location",ltn)
         setLoading(false)
         navigate(`/menu/${ltn}`)

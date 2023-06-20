@@ -14,6 +14,7 @@ function Signup() {
     firstName: "",
     lastName: "",
     email: "",
+    mobile : "",
     address:"",
     password: "",
     confirmPassword: "",
@@ -30,9 +31,9 @@ function Signup() {
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
-    setData((preve) => {
+    setData((prev) => {
       return {
-        ...preve,
+        ...prev,
         [name]: value,
       };
     });
@@ -53,8 +54,8 @@ function Signup() {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
-    const { firstName, email, password, confirmPassword,address } = data;
-    if (firstName && email && password && confirmPassword && address) {
+    const { firstName, email, password, confirmPassword,address,mobile } = data;
+    if (firstName && email && password && confirmPassword && address && mobile) {
       if (password === confirmPassword) {
     setLoading(true)
           const fetchData = await fetch(`${process.env.REACT_APP_BASE_URL}/signup`,{
@@ -123,6 +124,16 @@ function Signup() {
             name="email"
             className="mt-1 mb-2 w-full bg-slate-200 px-2 py-1 rounded focus-within:outline-blue-300"
             value={data.email}
+            onChange={handleOnChange}
+          />
+
+          <label htmlFor="mobile">Mobile</label>
+          <input
+            type={"mobile"}
+            id="mobile"
+            name="mobile"
+            className="mt-1 mb-2 w-full bg-slate-200 px-2 py-1 rounded focus-within:outline-blue-300"
+            value={data.mobile}
             onChange={handleOnChange}
           />
 

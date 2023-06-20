@@ -62,9 +62,11 @@ const Admin = () => {
   useEffect(() => {
     (async () => {
       setOrderLoading(true);
-      const fetchOrders = await fetch(`${process.env.REACT_APP_BASE_URL}/getorders`);
+      const fetchOrders = await fetch(
+        `${process.env.REACT_APP_BASE_URL}/getorders`
+      );
       const res = await fetchOrders.json();
-
+      console.log(res);
       if (res) {
         res.data && dispatch(setOrderData(res.data));
         res.message && toast(res.message);
@@ -193,24 +195,30 @@ const Admin = () => {
   };
 
   const deleteOrderList = async () => {
-    setOrderLoading(true);
-    const deleteOrder = await fetch(
-      `${process.env.REACT_APP_BASE_URL}/deleteall/${user?._id}`,
-      {
-        method: "DELETE",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(orderList),
+    if(user?._id){
+      setOrderLoading(true);
+      const deleteOrder = await fetch(
+        `${process.env.REACT_APP_BASE_URL}/deleteall/${user?._id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(orderList),
+        }
+      );
+      const res = await deleteOrder.json();
+  
+      if (res) {
+        res.data && dispatch(setDataProduct(res.data));
+        setOrderLoading(false);
+        res.message && toast(res.message);
+        setTimeout(() => {
+          window.location.reload(true);
+        }, 1000);
       }
-    );
-    const res = await deleteOrder.json();
-
-    if (res) {
-      res.data && dispatch(setDataProduct(res.data));
-      setOrderLoading(false);
-      window.location.reload(true);
-      res.message && toast(res.message);
+    }else{
+      toast("only admins can perform this action")
     }
   };
 
@@ -232,7 +240,9 @@ const Admin = () => {
       res.data && dispatch(setOrderData(res.data));
       setOrderLoading(false);
       res.message && toast(res.message);
-      window.location.reload(true);
+      setTimeout(() => {
+        window.location.reload(true);
+      }, 1000);
     }
   };
 
@@ -292,8 +302,10 @@ const Admin = () => {
     if (res) {
       res.data && dispatch(setOrderData(res.data));
       setLoadingProductDelete(false);
-      window.location.reload(true);
       res.message && toast(res.message);
+      setTimeout(() => {
+        window.location.reload(true);
+      }, 1000);
     }
   };
 
@@ -536,12 +548,19 @@ const Admin = () => {
             <div className="m-auto w-full mt-4 shadow flex flex-col p-3 bg-slate-300/70">
               <p className="text-sm">
                 Customer Name :{" "}
-                {orderList[count]?.user?.firstName +
-                  " " +
-                  orderList[count]?.user?.lastName}
+                {orderList[count]?.user?.firstName
+                  ? orderList[count]?.user?.firstName +
+                    " " +
+                    orderList[count]?.user?.lastName
+                  : orderList[count]?.guest?.firstName +
+                    " " +
+                    orderList[count]?.guest?.lastName}
               </p>
               <p className="text-sm">
-                Customer Address : {orderList[count]?.user?.address}
+                Customer Mobile : {orderList[count]?.user?.mobile ? orderList[count]?.user?.mobile: orderList[count]?.guest?.mobile}
+              </p>
+              <p className="text-sm">
+                Customer Address : {orderList[count]?.user?.address ? orderList[count]?.user?.address: orderList[count]?.guest?.address}
               </p>
             </div>
             <h2 className="text-bold mt-2 text-[rgb(233,142,30)]">

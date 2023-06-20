@@ -21,6 +21,8 @@ const Login = () => {
   const navigate = useNavigate()  
   const userData = useSelector(state => state)
 
+  const productCartItem = useSelector((state) => state.product.cartItem);
+
 
   const dispatch = useDispatch()
 
@@ -61,7 +63,7 @@ const Login = () => {
       if(dataRes.alert){
         localStorage.setItem('user', JSON.stringify(dataRes.data._id))
         dispatch(loginRedux(dataRes.data))
-        dispatch(setCartData(dataRes.cart))
+        // (productCartItem?.length <= 0) && dispatch(setCartData(dataRes.cart))
         setTimeout(() => {
           navigate("/")
         }, 1000);

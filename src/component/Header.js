@@ -59,7 +59,7 @@ const Header = () => {
             </Link>
             {currentRoute.pathname === "/" ||
             currentRoute.pathname === `/menu/${location}` ? null : (
-              <Link to={`menu/${location}`}>
+              location && <Link to={`menu/${location}`}>
                 <BiFoodMenu
                   className="text-[rgb(233,142,30)]"
                   size="25px"
@@ -142,7 +142,7 @@ const Header = () => {
                   <Link to={""} className="px-2 py-1">
                     Home
                   </Link>
-                  <Link to={`menu/${location}`}>Menu</Link>
+                  {location && <Link to={`menu/${location}`}>Menu</Link>}
                   <Link to={"contact"} className="px-2 py-1">
                     Contact
                   </Link>
