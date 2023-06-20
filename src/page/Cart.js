@@ -19,7 +19,7 @@ const Cart = () => {
   const productCartItem = useSelector((state) => state.product.cartItem);
   
   const user = useSelector((state) => state.user);
-  console.log(user);
+  
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = localStorage.getItem("location");

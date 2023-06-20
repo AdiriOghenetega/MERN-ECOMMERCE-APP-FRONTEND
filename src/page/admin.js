@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setOrderData, setDataProduct } from "../redux/productSlice";
 import { GrPrevious, GrNext } from "react-icons/gr";
+import Banner from "../component/banner";
 
 const Admin = () => {
   const [data, setData] = useState({
@@ -66,7 +67,7 @@ const Admin = () => {
         `${process.env.REACT_APP_BASE_URL}/getorders`
       );
       const res = await fetchOrders.json();
-      console.log(res);
+      
       if (res) {
         res.data && dispatch(setOrderData(res.data));
         res.message && toast(res.message);
@@ -312,6 +313,11 @@ const Admin = () => {
   return (
     <div className="p-4 bg-white">
       <div className="m-auto w-full max-w-[80%] shadow flex flex-col p-3 bg-white/70">
+        <h3 className="my-4">Upload Banner Ads</h3>
+        <Banner />
+      </div>
+      <hr className="m-4" />
+      <div className="m-auto w-full max-w-[80%] shadow flex flex-col p-3 bg-white/70">
         <label htmlFor="user_email">User Email</label>
         <input
           type={"text"}
@@ -334,7 +340,7 @@ const Admin = () => {
           <option value={"user"}>user</option>
         </select>
         {roleLoading ? (
-          <div className="flex flex-col justify-center items-center mt-2">
+          <div className="flex flex-col justify-center items-center mt-4">
             <GiHamburger
               size="25"
               className="animate-spin text-[rgb(233,142,30)]"

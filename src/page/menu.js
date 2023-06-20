@@ -1,11 +1,13 @@
-import React, { useRef } from "react";
+import React, { useRef,useState,useEffect } from "react";
 import { useSelector } from "react-redux";
 import CardFeature from "../component/CardFeature";
 import { GrPrevious, GrNext } from "react-icons/gr";
 import AllProduct from "../component/AllProduct";
 
 const Menu = () => {
+  const [count,setCount] = useState(0)
   const productData = useSelector((state) => state.product.productList);
+  const banner = useSelector((state) => state.banner.image);
 
   const snacksAndPastries = productData.filter(
     (el) =>
@@ -47,8 +49,73 @@ const Menu = () => {
     slideContinentalRef.current.scrollLeft -= 200;
   };
 
+  // useEffect(() => {
+  //   const displayInterval = setInterval(() => {
+  //       setCount((prev) => prev + 1);
+  //   }, 5000);
+
+  //   return () => clearInterval(displayInterval);
+  // }, [])
+
+  // if (count >= banner?.length-1) {
+  //   setCount(0);
+  // }
+  
+  // console.log(count)
+
   return (
     <div className="p-2 md:p-4 bg-slate-100">
+      <div className="w-[100%] md:flex my-4 md:my-0">
+        <div className="w-full md:w-[60%] bg-[rgb(255,255,255,.8)] hover:shadow-lg drop-shadow-lg py-5 px-4 rounded-lg">
+        <div className="mt-8 max-h-fit">
+        <div className="flex w-full items-center">
+          <h2 className="font-bold text-2xl text-[rgb(233,142,30)] mb-4 bg-[rgb(255,255,255,.8)] p-2 rounded">
+            Local Dishes
+          </h2>
+          <div className="ml-auto flex">
+            <button
+              onClick={prevLocal}
+              className="bg-slate-300 hover:bg-slate-400 text-lg  p-1 rounded"
+            >
+              <GrPrevious />
+            </button>
+            <button
+              onClick={nextLocal}
+              className="bg-slate-300 hover:bg-slate-400 text-lg p-1 rounded ml-2"
+            >
+              <GrNext />
+            </button>
+          </div>
+        </div>
+        <div
+          className="flex gap-5 overflow-scroll scrollbar-none scroll-smooth transition-all"
+          ref={slidelocalRef}
+        >
+          {localDishes[0]
+            ? localDishes.map((el) => {
+                return (
+                  <CardFeature
+                    key={el._id + "local"}
+                    id={el._id}
+                    name={el.name}
+                    category={el.category}
+                    price={el.price}
+                    image={el.image}
+                  />
+                );
+              })
+            : loading.map((el, index) => (
+                <CardFeature loading="Loading..." key={index} />
+              ))}
+        </div>
+      </div>
+        </div>
+        <div className="w-full md:w-[40%] my-4 md:my-0 bg-[rgb(255,255,255,.8)] hover:shadow-lg drop-shadow-lg py-5 px-4 rounded-lg md:ml-4">
+        <div className="h-[400px] overflow-hidden w-full">
+              <img src={banner[count]?.image} className="h-full w-full" />
+            </div>
+        </div>
+      </div>
       <div className="">
         <div className="flex w-full items-center">
           <h2 className="font-bold text-2xl text-[rgb(233,142,30)] mb-4 bg-[rgb(255,255,255,.8)] p-2 rounded">
@@ -78,48 +145,6 @@ const Menu = () => {
                 return (
                   <CardFeature
                     key={el._id + "snacks"}
-                    id={el._id}
-                    name={el.name}
-                    category={el.category}
-                    price={el.price}
-                    image={el.image}
-                  />
-                );
-              })
-            : loading.map((el, index) => (
-                <CardFeature loading="Loading..." key={index} />
-              ))}
-        </div>
-      </div>
-      <div className="mt-8">
-        <div className="flex w-full items-center">
-          <h2 className="font-bold text-2xl text-[rgb(233,142,30)] mb-4 bg-[rgb(255,255,255,.8)] p-2 rounded">
-            Local Dishes
-          </h2>
-          <div className="ml-auto flex">
-            <button
-              onClick={prevLocal}
-              className="bg-slate-300 hover:bg-slate-400 text-lg  p-1 rounded"
-            >
-              <GrPrevious />
-            </button>
-            <button
-              onClick={nextLocal}
-              className="bg-slate-300 hover:bg-slate-400 text-lg p-1 rounded ml-2"
-            >
-              <GrNext />
-            </button>
-          </div>
-        </div>
-        <div
-          className="flex gap-5 overflow-scroll scrollbar-none scroll-smooth transition-all"
-          ref={slidelocalRef}
-        >
-          {localDishes[0]
-            ? localDishes.map((el) => {
-                return (
-                  <CardFeature
-                    key={el._id + "local"}
                     id={el._id}
                     name={el.name}
                     category={el.category}
