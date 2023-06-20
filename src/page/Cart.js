@@ -128,10 +128,10 @@ const Cart = () => {
                 <div className="my-6">
                   <h3>You're not logged in</h3>
                   <Link
-                    to={"/signup"}
+                    to={"/login"}
                     className="text-[rgb(233,142,30)] underline"
                   >
-                    Sign Up
+                    Log in
                   </Link>
                   <h3>Or kindly provide the details below</h3>
                 </div>
