@@ -67,7 +67,7 @@ const Menu = () => {
     <div className="p-2 md:p-4 bg-slate-100">
       <div className="w-[100%] md:flex my-4 md:my-0">
         <div className="w-full md:w-[60%] bg-[rgb(255,255,255,.8)] hover:shadow-lg drop-shadow-lg py-5 px-4 rounded-lg">
-        <div className="mt-8 max-h-fit">
+        <div className="max-h-fit">
         <div className="flex w-full items-center">
           <h2 className="font-bold text-2xl text-[rgb(233,142,30)] mb-4 bg-[rgb(255,255,255,.8)] p-2 rounded">
             Local Dishes
@@ -116,7 +116,7 @@ const Menu = () => {
             </div>
         </div>
       </div>
-      <div className="">
+      <div className="mt-8">
         <div className="flex w-full items-center">
           <h2 className="font-bold text-2xl text-[rgb(233,142,30)] mb-4 bg-[rgb(255,255,255,.8)] p-2 rounded">
             Snacks and Pastries
