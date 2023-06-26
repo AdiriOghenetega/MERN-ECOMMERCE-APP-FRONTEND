@@ -104,7 +104,7 @@ const Menu = () => {
           </div>
         </div>
       </div>
-      <div className="w-[100%] md:flex my-4 ">
+      <div className="w-[100%] flex flex-col-reverse md:flex-row my-4 ">
         <div className="w-full md:w-[30%] my-4 md:my-0 bg-[rgb(255,255,255,.8)] hover:shadow-lg drop-shadow-lg py-5 px-4 rounded-lg ">
           <div className="h-auto overflow-hidden w-full">
             <img src={banner[1]?.image} alt="banner2" className="h-full w-full" />

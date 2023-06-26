@@ -26,7 +26,7 @@ const Product = () => {
         <div className="max-w-sm  overflow-hidden h-[300px] w-[300px] p-5">
           <img
             src={productDisplay?.image}
-            className="hover:scale-105 transition-all h-full w-full"
+            className="hover:scale-105 transition-all h-full w-full rounded"
           />
         </div>
         <div className="flex flex-col gap-1 py-5 pl-5 md:pl-0">
@@ -49,7 +49,7 @@ const Product = () => {
         </div>
       </div>
 
-      <AllProduct heading={"Related Products"} selectedCategory={productDisplay?.category} />
+      <AllProduct heading={"Related Products"} selectedCategory={productDisplay?.category} selectedProductId={productDisplay?._id} />
     </div>
   );
 };

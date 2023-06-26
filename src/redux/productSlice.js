@@ -69,8 +69,6 @@ export const productSlice = createSlice({
         const total = price * qtyDec;
 
         state.cartItem[index].total = total;
-
-      
       }
     },
   },

@@ -18,7 +18,7 @@ const CardFeature = ({ image, name, price, category, loading, id }) => {
   };
 
   return (
-    <div className={`w-full mt-2 min-w-[200px] max-w-[200px] bg-[rgb(255,255,255,.8)] hover:shadow-lg drop-shadow-lg py-5 px-4 cursor-pointer flex flex-col ${loading && "animate-pulse"}`}>
+    <div className={`w-full mt-2 min-w-[230px] max-w-[200px] bg-[rgb(255,255,255,.8)] rounded hover:shadow-lg drop-shadow-lg py-5 px-4 cursor-pointer flex flex-col ${loading && "animate-pulse"}`}>
       {image ? (
         <>
           <Link
@@ -26,7 +26,7 @@ const CardFeature = ({ image, name, price, category, loading, id }) => {
             onClick={() => window.scrollTo({ top: "0", behavior: "smooth" })}
           >
             <div className="h-28 flex flex-col justify-center items-center">
-              <img src={image} className="h-full w-full" />
+              <img src={image} className="h-full w-full rounded" />
             </div>
             <h3 className="font-semibold text-slate-600  capitalize text-lg mt-4 whitespace-nowrap overflow-hidden">
               {name}
