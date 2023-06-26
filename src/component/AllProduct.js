@@ -36,7 +36,7 @@ const AllProduct = ({ heading, selectedCategory, selectedProductId }) => {
   }, [selectedCategory, selectedProductId, productData]);
 
   const handleFilterProduct = (category) => {
-    setSearchFilter("")
+    setSearchFilter("");
     setFilterBy(category);
     const filter = productData.filter(
       (el) => el.category.toLowerCase() === category.toLowerCase()
@@ -48,32 +48,33 @@ const AllProduct = ({ heading, selectedCategory, selectedProductId }) => {
 
   const handleSearchChange = (e) => {
     const { value } = e.target;
-    setFilterBy("")
+    setFilterBy("");
     setSearchFilter(value);
   };
 
   useEffect(() => {
-   if(!selectedCategory){
-     const searchProduct = productData.filter((el) =>
-      el.name.toLowerCase().includes(searchFilter.toLowerCase())
-    );
-    setDataFilter(searchProduct);}
+    if (!selectedCategory) {
+      const searchProduct = productData.filter((el) =>
+        el.name.toLowerCase().includes(searchFilter.toLowerCase())
+      );
+      setDataFilter(searchProduct);
+    }
   }, [searchFilter]);
 
   const loadingArrayFeature = new Array(10).fill(null);
 
   return (
-    <div className="my-5 flex flex-col w-full items-center">
+    <div className="my-5 flex flex-col w-full items-center ">
       <h2 className="font-bold text-2xl text-[rgb(233,142,30)] mb-4 bg-[rgb(255,255,255,.8)] p-2 rounded w-auto">
         {heading}
       </h2>
       <div
         className={`${selectedCategory && "justify-center flex-col"} ${
           !selectedCategory && "w-full"
-        } md:w-[90%] md:flex justify-between items-center`}
+        } md:w-[90%] md:flex md:flex-wrap justify-between items-center `}
       >
         <div className="flex md:gap-5 overflow-scroll scroll-smooth scrollbar-none transition-all max-w-full py-2">
-          {categoryList[0] ? (
+          {categoryList[0] &&
             categoryList.map((el) => {
               return (
                 <FilterProduct
@@ -83,17 +84,10 @@ const AllProduct = ({ heading, selectedCategory, selectedProductId }) => {
                   onClick={() => handleFilterProduct(el)}
                 />
               );
-            })
-          ) : (
-            <div className="min-h-[150px] flex justify-center items-center">
-              <p className="animate-spin text-[rgb(233,142,30)]">
-                <GiHamburger size="25px" />
-              </p>
-            </div>
-          )}
+            })}
         </div>
-        {!selectedCategory && (
-          <div className="flex justify-center md:py-2 items-center px-2 md:px-8 mt-4 rounded">
+        {!selectedCategory && dataFilter[0] && (
+          <div className="flex justify-center md:py-2 items-center px-2 mt-4 rounded">
             <label
               htmlFor="search"
               className="my-1 text-black md:mx-4 text-extrabold text-lg"
@@ -113,7 +107,7 @@ const AllProduct = ({ heading, selectedCategory, selectedProductId }) => {
       </div>
       {dataFilter?.length <= 0 ? (
         <div className="my-8">
-          <h3 className="text-xl text-bold">
+          <h3 className="md:text-xl text-bold">
             No product match your search preference
           </h3>
         </div>
