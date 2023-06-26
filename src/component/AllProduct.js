@@ -53,7 +53,7 @@ const AllProduct = ({ heading, selectedCategory, selectedProductId }) => {
   };
 
   useEffect(() => {
-    if (!selectedCategory) {
+    if (!selectedCategory && searchFilter !== "") {
       const searchProduct = productData.filter((el) =>
         el.name.toLowerCase().includes(searchFilter.toLowerCase())
       );
