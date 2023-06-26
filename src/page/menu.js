@@ -105,12 +105,12 @@ const Menu = () => {
         </div>
       </div>
       <div className="w-[100%] flex flex-col-reverse md:flex-row my-4 ">
-        <div className="w-full md:w-[30%] my-4 md:my-0 bg-[rgb(255,255,255,.8)] hover:shadow-lg drop-shadow-lg py-5 px-4 rounded-lg ">
-          <div className="h-auto overflow-hidden w-full">
+        <div className="w-full md:w-[30%] my-4 md:my-0 bg-[rgb(255,255,255,.8)] hover:shadow-lg drop-shadow-lg py-5 px-4 rounded-lg h-[550px] md:h-[820px]">
+          <div className="h-full overflow-hidden w-full">
             <img src={banner[1]?.image} alt="banner2" className="h-full w-full" />
           </div>
         </div>
-        <div className="w-full md:w-[70%] bg-[rgb(255,255,255,.8)] md:ml-4 hover:shadow-lg drop-shadow-lg py-5 px-4 rounded-lg ">
+        <div className="w-full md:w-[70%] bg-[rgb(255,255,255,.8)] md:ml-4 hover:shadow-lg drop-shadow-lg py-5 px-4 rounded-lg h-[820px] ">
           <div className="">
             <div className="flex w-full items-center">
               <h2 className="font-bold text-2xl text-[rgb(233,142,30)] mb-4 bg-[rgb(255,255,255,.8)] p-2 rounded">
