@@ -78,7 +78,6 @@ const Cart = () => {
       console.log(orderData);
       setPaymentLoading(false);
       toast("Redirect to payment Gateway...!");
-      dispatch(setCartData([]));
       window.location.href = data.data.authorization_url;
     } else {
       toast("Kindly login or provide the required details to continue purchase")
