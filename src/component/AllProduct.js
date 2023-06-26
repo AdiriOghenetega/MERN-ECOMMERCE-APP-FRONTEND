@@ -53,10 +53,11 @@ const AllProduct = ({ heading, selectedCategory, selectedProductId }) => {
   };
 
   useEffect(() => {
-    const searchProduct = productData.filter((el) =>
+   if(!selectedCategory){
+     const searchProduct = productData.filter((el) =>
       el.name.toLowerCase().includes(searchFilter.toLowerCase())
     );
-    setDataFilter(searchProduct);
+    setDataFilter(searchProduct);}
   }, [searchFilter]);
 
   const loadingArrayFeature = new Array(10).fill(null);
