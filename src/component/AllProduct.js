@@ -71,7 +71,7 @@ const AllProduct = ({ heading, selectedCategory, selectedProductId }) => {
       <div
         className={`${selectedCategory && "justify-center flex-col"} ${
           !selectedCategory && "w-full"
-        } md:w-[90%] md:flex md:flex-wrap justify-between items-center `}
+        } md:w-[95%] md:flex md:flex-wrap justify-between items-center `}
       >
         <div className="flex md:gap-5 overflow-scroll scroll-smooth scrollbar-none transition-all max-w-full py-2">
           {categoryList[0] &&
@@ -87,16 +87,10 @@ const AllProduct = ({ heading, selectedCategory, selectedProductId }) => {
             })}
         </div>
         {!selectedCategory && dataFilter[0] && (
-          <div className="flex justify-center md:py-2 items-center px-2 mt-4 rounded">
-            <label
-              htmlFor="search"
-              className="my-1 text-black md:mx-4 text-extrabold text-lg"
-            >
-              Search
-            </label>
+          <div className="flex flex-col justify-center md:py-2 items-center px-2 mt-4 rounded">
             <input
               type={"text"}
-              className="bg-slate-200 p-2 my-1 ml-2 rounded outline-none"
+              className="bg-slate-200 p-2 my-1 rounded outline-none"
               name="search"
               onChange={handleSearchChange}
               value={searchFilter}

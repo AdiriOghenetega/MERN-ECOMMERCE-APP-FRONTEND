@@ -23,7 +23,7 @@ const Product = () => {
   return (
     <div className="p-2 md:p-4 bg-slate-100">
       <div className="w-full max-w-4xl m-auto md:flex bg-[rgb(255,255,255,.8)]">
-        <div className="max-w-sm  overflow-hidden h-[300px] w-[300px] p-5">
+        <div className="max-w-sm  overflow-hidden h-[300px] w-full md:w-[300px] p-5">
           <img
             src={productDisplay?.image}
             className="hover:scale-105 transition-all h-full w-full rounded"
