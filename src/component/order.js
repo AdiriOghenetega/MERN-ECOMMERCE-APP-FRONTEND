@@ -4,6 +4,7 @@ import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { setOrderData } from "../redux/productSlice";
 import { GrPrevious, GrNext } from "react-icons/gr";
+import { useNavigate } from "react-router-dom";
 
 const Orders = () => {
   const [orderLoading, setOrderLoading] = useState(false);
@@ -14,6 +15,8 @@ const Orders = () => {
   const user = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
+
+  const navigate = useNavigate();
 
   //fetch orders
   useEffect(() => {
@@ -50,7 +53,7 @@ const Orders = () => {
 
   const updateOrderStatus = async () => {
     try {
-      setOrderLoading(true);
+      if(displayOrder[count]._id &&  user._id){setOrderLoading(true);
       const updateOrders = await fetch(
         `${process.env.REACT_APP_BASE_URL}/updateorder?order_id=${displayOrder[count]._id}&user_id=${user._id}`,
         {
@@ -58,7 +61,7 @@ const Orders = () => {
           headers: {
             "content-type": "application/json",
           },
-          body: JSON.stringify({ orderStatus: "Delivered" }),
+          body: JSON.stringify({ orderStatus: "delivered" }),
         }
       );
       const res = await updateOrders.json();
@@ -67,6 +70,8 @@ const Orders = () => {
         res.data && dispatch(setOrderData(res.data));
         setOrderLoading(false);
         res.message && toast(res.message);
+      }}else{
+        toast("only admins can perform this action")
       }
     } catch (error) {
       console.log(error);
@@ -104,7 +109,7 @@ const Orders = () => {
 
   const DeleteOrder = async () => {
     try {
-      setOrderLoading(true);
+      if(displayOrder[count]._id && user._id){setOrderLoading(true);
       const deleteOrder = await fetch(
         `${process.env.REACT_APP_BASE_URL}/deleteone?order_id=${displayOrder[count]._id}&user_id=${user._id}`,
         {
@@ -121,6 +126,8 @@ const Orders = () => {
         res.data && dispatch(setOrderData(res.data));
         setOrderLoading(false);
         res.message && toast(res.message);
+      }}else{
+        toast("only admins can perform this action")
       }
     } catch (error) {
       console.log(error);
@@ -245,9 +252,9 @@ const Orders = () => {
                   />
                 </div>
               ) : (
-                displayOrder[count]?.orderStatus !== "Delivered" && (
+                displayOrder[count]?.orderStatus !== "delivered" && (
                   <button
-                    className="bg-[rgb(233,142,30)] hover:bg-orange-600 text-white font-medium p-2 w-fit rounded my-2 drop-shadow m-auto"
+                    className="bg-[rgb(233,142,30)] hover:bg-orange-600 text-white font-medium p-2 w-fit rounded my-4 drop-shadow m-auto"
                     onClick={updateOrderStatus}
                   >
                     Mark Order Delivered
@@ -260,6 +267,12 @@ const Orders = () => {
               >
                 Delete Order
               </button>
+              {displayOrder[count]?.orderStatus === "pending" && <button
+                    className="bg-[rgb(233,142,30)] ml-2 hover:bg-orange-600 text-white font-medium p-2 w-fit rounded my-2 drop-shadow m-auto"
+                    onClick={()=>navigate(`/order/${displayOrder[count]?._id}`)}
+                  >
+                    Initiate Order Delivery
+                  </button>}
             </div>
           </div>
         ) : orderLoading ? (
@@ -274,7 +287,9 @@ const Orders = () => {
             You have no orders at the moment
           </h2>
         )}
+        
       </div>
+      
     </div>
   );
 };

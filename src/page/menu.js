@@ -100,14 +100,14 @@ const Menu = () => {
         </div>
         <div className="w-full md:w-[50%] lg:w-[40%] my-4 md:my-0 bg-[rgb(255,255,255,.8)] hover:shadow-lg drop-shadow-lg py-5 px-4 rounded-lg md:ml-4">
           <div className="md:h-[400px] h-[300px] overflow-hidden w-full">
-            <img src={banner[0]?.image} alt="barner1" className="h-full w-full" />
+            <img src={banner[0]?.image} alt="banner" className="h-full w-full" />
           </div>
         </div>
       </div>
       <div className="w-[100%] flex flex-col-reverse md:flex-row my-4 ">
         <div className="w-full md:w-[50%] lg:w-[35%] my-4 md:my-0 bg-[rgb(255,255,255,.8)] hover:shadow-lg drop-shadow-lg py-5 px-4 rounded-lg h-[550px] md:h-[820px]">
           <div className="h-full overflow-hidden w-full">
-            <img src={banner[1]?.image} alt="banner2" className="h-full w-full" />
+            <img src={banner[1]?.image} alt="banner" className="h-full w-full" />
           </div>
         </div>
         <div className="w-full md:w-[50%] lg:w-[65%] bg-[rgb(255,255,255,.8)] md:ml-4 hover:shadow-lg drop-shadow-lg py-5 px-4 rounded-lg md:h-[820px] ">

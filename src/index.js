@@ -22,6 +22,7 @@ import Cart from "./page/Cart";
 import Success from "./page/Success";
 import { store } from './redux/store';
 import UpdateProducts from "./page/updateProducts";
+import InitiateDelivery from "./page/initiatedelivery";
 import Confirmation from "./page/confirmation"
 
 
@@ -35,6 +36,7 @@ const router = createBrowserRouter(
       <Route path="login" element={<Login />} />
       <Route path="admin" element={<Admin />} />
       <Route path="admin/:location" element={<UpdateProducts />} />
+      <Route path="order/:id" element={<InitiateDelivery />} />
       <Route path="signup" element={<Signup />} />
       <Route path="cart" element={<Cart />} />
       <Route path="success" element={<Success/>}/>

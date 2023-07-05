@@ -59,8 +59,7 @@ const UploadProduct = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(data);
-
+    
     const { name, image, category, price, stores } = data;
 
     if (name && image && category && price && stores) {
