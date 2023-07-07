@@ -252,7 +252,7 @@ const Orders = () => {
                   />
                 </div>
               ) : (
-                displayOrder[count]?.orderStatus !== "delivered" && (
+                displayOrder[count]?.orderStatus === "delivering" && (
                   <button
                     className="bg-[rgb(233,142,30)] hover:bg-orange-600 text-white font-medium p-2 w-fit rounded my-4 drop-shadow m-auto"
                     onClick={updateOrderStatus}

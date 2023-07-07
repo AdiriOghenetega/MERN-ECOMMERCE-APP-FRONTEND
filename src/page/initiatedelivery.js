@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import { toast } from "react-hot-toast";
 import { BsCloudUpload } from "react-icons/bs";
 import { GiHamburger } from "react-icons/gi";
@@ -6,8 +6,10 @@ import { ImagetoBase64 } from "../utility/ImagetoBase64";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams,useNavigate } from 'react-router-dom';
 import { setOrderData } from "../redux/productSlice";
+import Select from 'react-select';
 
 const InitiateDelivery = () => {
+  const [riderList,setRiderList]=useState([])
     const [riderDetails,setRiderDetails]=useState({
         name:"",
         mobile:"",
@@ -21,6 +23,16 @@ const InitiateDelivery = () => {
     const navigate = useNavigate()
     const {id} = params
     const user = useSelector((state) => state.user);
+
+    const options = riderList.map(el=> {
+      return {label:el.name,value:{name:el.name,
+      mobile:el.mobile,
+      image:el.image}}
+  })
+
+  const handleSelect = (selected)=>{
+    setRiderDetails(selected.value)
+  }
 
     const handleOnChange = (e) => {
         const { name, value } = e.target;
@@ -81,14 +93,34 @@ const InitiateDelivery = () => {
           console.log(error);
         }
       };
+
+      //fetch rider list
+     useEffect(()=>{
+      (async()=>{
+          const fetchRiders = await fetch(`${process.env.REACT_APP_BASE_URL}/getriders`)
+          const res = await fetchRiders.json()
+          if(res){
+            res?.data && setRiderList(res.data)
+          }
+      })()
+     },[])
     
   return (
     <div>
       <form
         className="m-auto w-full max-w-[80%] shadow mt-4 flex flex-col p-3 bg-white/70"
-        
       >
-<label htmlFor="name">Rider's Name</label>
+         <label className='text-lg text-bold' htmlFor="selectRider" >Choose from existing riders</label>
+        <Select
+        value={riderDetails}
+        onChange={handleSelect}
+        options={options}
+        id="selectRider"
+        closeMenuOnSelect={false}
+        allowSelectAll={true}
+      />
+      <h2 className='text-lg text-bold my-4'>Or Use New Rider</h2>
+    <label htmlFor="name">Rider's Name</label>
         <input
           type={"text"}
           name="name"
