@@ -46,13 +46,13 @@ const Intro = () => {
           </div>
         </div>
       )}
-      <div className="flex flex-col justify-center items-center h-[530px] bg-hero-pattern bg-no-repeat bg-cover md:bg-[right 30rem] w-full backdrop-blur-[1.5px] mb-8">
-        <IntroComponent closed={closed} />
-      </div>
-      <hr className="w-[80%] m-8" />
-      <div className="flex flex-col justify-center items-center max-h-auto md:max-h-[400px] mb-8 w-full">
-        <h1 className="text-3xl text-[rgb(233,142,30)] p-2 drop-shadow-lg">
-          how to order
+      <div className="w-full bg-hero-pattern bg-no-repeat bg-cover">
+      <div className="flex flex-col justify-center items-center max-h-auto mb-8 w-full">
+        <h1 className="text-4xl text-[rgb(233,142,30)] p-2 drop-shadow-lg text-center my-8">
+          Welcome to Hcue Restaurant
+        </h1>
+        <h1 className="text-3xl text-[rgb(233,142,30)] p-2 drop-shadow-lg text-center my-8 bg-[rgb(255,255,255,.8)] p-4 rounded">
+        How to order
         </h1>
         <div className="flex flex-col md:flex-row justify-center md:gap-3 md:gap-0 md:justify-evenly items-center mt-5 w-full">
           <div className="flex flex-col justify-start items-center border-2 p-2 drop-shadow h-[300px] bg-[rgb(255,255,255,.8)] min-w-[80%] md:min-w-0">
@@ -93,9 +93,14 @@ const Intro = () => {
         </div>
       </div>
       <hr className="w-[80%] m-8" />
+      <div className="flex flex-col justify-center items-center h-[530px] md:bg-[right 30rem] w-full backdrop-blur-[1.5px] mb-8">
+        <IntroComponent closed={closed} />
+      </div>
+      </div>
+      <hr className="w-[80%] m-8" />
       <div className="h-[500px] w-full flex flex-col justify-center items-center relative">
         <div className="bg-[rgb(233,142,30)] h-[300px] w-full p-10 flex flex-col justify-between">
-          <h3 className="text-white text-sm md:text-lg text-bold md:w-[450px]">
+          <h3 className="text-white text-sm md:text-lg md:w-[450px]">
             With the HcueEats App, anyone can simply use a mobile device to look
             over our numerous delicacies. All you need to do is to place an
             order, and pick up in-store or have it delivered to your doorstep.
