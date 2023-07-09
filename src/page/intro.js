@@ -46,15 +46,15 @@ const Intro = () => {
           </div>
         </div>
       )}
-      <div className="w-full bg-hero-pattern bg-no-repeat bg-cover">
+      <div className="w-full flex flex-col items-center bg-hero-pattern bg-no-repeat bg-cover">
       <div className="flex flex-col justify-center items-center max-h-auto mb-8 w-full">
-        <h1 className="text-4xl text-[rgb(233,142,30)] p-2 drop-shadow-lg text-center my-8">
+        <h1 className="text-2xl md:text-4xl text-[rgb(233,142,30)] p-2 drop-shadow-lg text-center my-8">
           Welcome to Hcue Restaurant
         </h1>
-        <h1 className="text-3xl text-[rgb(233,142,30)] p-2 drop-shadow-lg text-center my-8 bg-[rgb(255,255,255,.8)] p-4 rounded">
+        <h1 className="md:text-3xl text-2xl text-[rgb(233,142,30)] p-2 drop-shadow-lg text-center my-8 bg-[rgb(255,255,255,.8)] p-4 rounded">
         How to order
         </h1>
-        <div className="flex flex-col md:flex-row justify-center md:gap-3 md:gap-0 md:justify-evenly items-center mt-5 w-full">
+        <div className="flex flex-col md:flex-row justify-center md:gap-3 md:gap-0 md:justify-evenly items-center w-full">
           <div className="flex flex-col justify-start items-center border-2 p-2 drop-shadow h-[300px] bg-[rgb(255,255,255,.8)] min-w-[80%] md:min-w-0">
             <div className="flex flex-col justify-center my-10 items-center text-[rgb(233,142,30)] animate-bounce">
               <MdShareLocation size="100px" />
