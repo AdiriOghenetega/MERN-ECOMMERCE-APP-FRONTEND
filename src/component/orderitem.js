@@ -8,10 +8,10 @@ export default function OrderItem({ elem }) {
   return (
     <div
       onClick={() => setDetailsModal((prev) => !prev)}
-      className="w-full cursor-pointer"
+      className="relative w-full cursor-pointer"
     >
       {detailsModal && (
-        <div className="absolute top-20 h-auto w-full min-h-full min-w-full bg-transparent backdrop-blur-[2px] z-40 flex flex-col justify-start items-center ">
+        <div className="absolute top-20 h-full w-full min-h-full min-w-full bg-transparent backdrop-blur-[2px] z-40 flex flex-col justify-start items-center ">
           <div className="bg-[rgb(254,235,228)] md:w-[70%] p-2 md:p-10">
             <div className="flex flex-row items-center justify-between w-full ">
               <h3 className="font-bold text-[20px]">Order Details</h3>

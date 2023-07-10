@@ -47,12 +47,12 @@ const Header = () => {
           </div>
         </Link>
 
-        <div className="flex items-center gap-4 md:gap-7">
-          <nav className="gap-4 md:gap-6 text-base md:text-lg hidden md:flex">
+        <div className="flex items-center">
+          <nav className="items-center text-base md:text-lg hidden md:flex">
             <Link to={""}>
               <IoHome
                 size="25px"
-                className="text-[rgb(233,142,30)]"
+                className="text-[rgb(233,142,30)] mr-4"
                 data-tooltip-id="my-tooltip"
                 data-tooltip-content="Home"
                 data-tooltip-hidden={isMobile && true}
@@ -62,7 +62,7 @@ const Header = () => {
             currentRoute.pathname === `/menu/${location}` ? null : (
               location && <Link to={`menu/${location}`}>
                 <BiFoodMenu
-                  className="text-[rgb(233,142,30)]"
+                  className="text-[rgb(233,142,30)] mr-4"
                   size="25px"
                   data-tooltip-id="my-tooltip"
                   data-tooltip-content="Menu"
@@ -76,13 +76,14 @@ const Header = () => {
                 data-tooltip-id="my-tooltip"
                 data-tooltip-content="Contact us"
                 data-tooltip-hidden={isMobile && true}
+                className="mr-4"
               />
             </Link>
           </nav>
           <div
             className={`text-2xl text-slate-600 relative ${
               currentRoute.pathname === "/" && "pointer-events-none"
-            }`}
+            } mr-4`}
           >
             <Link to={"cart"}>
               <BsCartFill
@@ -95,6 +96,7 @@ const Header = () => {
               </div>
             </Link>
           </div>
+          <div className="mr-4">
             <Link to={"orderList"}>
               <MdListAlt
                 size="28px"
@@ -104,7 +106,8 @@ const Header = () => {
                 className="text-[rgb(233,142,30)]"
               />
             </Link>
-          <div className="ml-2 text-slate-600" onClick={handleShowMenu}>
+          </div>
+          <div className=" text-slate-600" onClick={handleShowMenu}>
             <div className="text-3xl cursor-pointer w-8 h-8 rounded-full overflow-hidden drop-shadow-md text-[rgb(233,142,30)]">
               {userData.image ? (
                 <img
