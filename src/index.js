@@ -24,6 +24,7 @@ import { store } from './redux/store';
 import UpdateProducts from "./page/updateProducts";
 import InitiateDelivery from "./page/initiatedelivery";
 import Confirmation from "./page/confirmation"
+import OrderList from "./page/orderList";
 
 
 const router = createBrowserRouter(
@@ -39,6 +40,7 @@ const router = createBrowserRouter(
       <Route path="order/:id" element={<InitiateDelivery />} />
       <Route path="signup" element={<Signup />} />
       <Route path="cart" element={<Cart />} />
+      <Route path="orderList" element={<OrderList />} />
       <Route path="success" element={<Success/>}/>
       <Route path="confirmation" element={<Confirmation />}/>
     </Route>

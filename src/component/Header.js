@@ -6,6 +6,7 @@ import { BsCartFill } from "react-icons/bs";
 import { IoHome } from "react-icons/io5";
 import { GrContact } from "react-icons/gr";
 import { BiFoodMenu } from "react-icons/bi";
+import {MdListAlt} from "react-icons/md"
 import { useDispatch, useSelector } from "react-redux";
 import { logoutRedux } from "../redux/userSlice";
 import { toast } from "react-hot-toast";
@@ -94,6 +95,15 @@ const Header = () => {
               </div>
             </Link>
           </div>
+            <Link to={"orderList"}>
+              <MdListAlt
+                size="28px"
+                data-tooltip-id="my-tooltip"
+                data-tooltip-content="Your Orders"
+                data-tooltip-hidden={isMobile && true}
+                className="text-[rgb(233,142,30)]"
+              />
+            </Link>
           <div className="ml-2 text-slate-600" onClick={handleShowMenu}>
             <div className="text-3xl cursor-pointer w-8 h-8 rounded-full overflow-hidden drop-shadow-md text-[rgb(233,142,30)]">
               {userData.image ? (

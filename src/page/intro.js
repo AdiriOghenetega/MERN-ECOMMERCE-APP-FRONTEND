@@ -63,7 +63,7 @@ const Intro = () => {
               Select nearest location
             </h2>
             <h3 className=" w-[250px] text-center">
-              Select the state and restaurant closest to your pick-up/delivery
+              Select the restaurant closest to your pick-up/delivery
               location.
             </h3>
           </div>

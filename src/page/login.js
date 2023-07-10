@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginRedux } from "../redux/userSlice";
 import {setCartData} from "../redux/productSlice"
 import {GiHamburger} from "react-icons/gi"
+import {setOrderData} from "../redux/orderSlice"
 
 
 const Login = () => {
@@ -63,7 +64,8 @@ const Login = () => {
       if(dataRes.alert){
         localStorage.setItem('user', JSON.stringify(dataRes.data._id))
         dispatch(loginRedux(dataRes.data))
-        // (productCartItem?.length <= 0) && dispatch(setCartData(dataRes.cart))
+        (productCartItem?.length <= 0) && dispatch(setCartData(dataRes.cart))
+        dispatch(setOrderData(dataRes.orderList))
         setTimeout(() => {
           navigate("/")
         }, 1000);

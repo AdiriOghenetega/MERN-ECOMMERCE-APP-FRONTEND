@@ -17,7 +17,7 @@ const InitiateDelivery = () => {
     })
     const [loading, setLoading] = useState(false);
 
-    console.log(riderDetails)
+    
     const dispatch=useDispatch()
     const params = useParams()
     const navigate = useNavigate()

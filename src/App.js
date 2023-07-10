@@ -7,11 +7,11 @@ import { setDataProduct, setCartData } from "./redux/productSlice";
 import { loginRedux } from "./redux/userSlice";
 import { bannerRedux } from "./redux/bannerSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { setOrderData } from "./redux/orderSlice";
 
 function App() {
   const dispatch = useDispatch();
   const cartData = useSelector((state) => state.product.cartItem);
-  const productData = useSelector((state) => state.product.productList);
   const user = localStorage.getItem("user");
   const location = localStorage.getItem("location");
 
@@ -35,7 +35,6 @@ function App() {
             let productDetails = availProducts.filter(
               (elem) => elem._id === item._id
             );
-            
 
             return {
               _id: productDetails[0]._id,
@@ -48,7 +47,7 @@ function App() {
               total: item.total,
             };
           });
-          
+
           dispatch(setCartData(populatedData));
         }
       })();
@@ -64,24 +63,22 @@ function App() {
           `${process.env.REACT_APP_BASE_URL}/user/${JSON.parse(retrievedUser)}`
         );
         const resData = await res.json();
-        dispatch(loginRedux(resData));
+        dispatch(loginRedux(resData.data));
+        dispatch(setOrderData(resData.orderList));
       }
     })();
   }, []);
-  
+
   //get banner
   useEffect(() => {
     (async () => {
-        const res = await fetch(
-          `${process.env.REACT_APP_BASE_URL}/getbanners`
-        );
-        const resdata = await res.json();
-        if(resdata){
-          resdata.data && dispatch(bannerRedux(resdata.data));
-        }
+      const res = await fetch(`${process.env.REACT_APP_BASE_URL}/getbanners`);
+      const resdata = await res.json();
+      if (resdata) {
+        resdata.data && dispatch(bannerRedux(resdata.data));
+      }
     })();
   }, []);
-
 
   //store cart data
   useEffect(() => {
