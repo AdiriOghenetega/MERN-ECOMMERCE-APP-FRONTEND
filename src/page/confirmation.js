@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { setOrderData } from "../redux/productSlice";
 import { useNavigate } from "react-router-dom";
 import { setCartData } from "../redux/productSlice";
-import click from "../assets/click.gif";
+
 
 const Confirmation = () => {
   const dispatch = useDispatch();
@@ -57,8 +57,12 @@ const Confirmation = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center w-full min-h-[calc(100vh-4em)]">
+    <div className="flex flex-col justify-center items-center w-full min-h-[calc(100vh-8em)]">
       <div className="m-auto flex flex-col justify-center items-center">
+        <div className="flex flex-col justify-center items-center my-4">
+      <h3 className="font-bold">Transaction reference : </h3>
+      <h3 className="font-medium text-slate-700">{txReference}</h3>
+        </div>
         {loading ? (
           <div className="flex flex-col justify-center items-center">
             <GiHamburger
@@ -74,10 +78,7 @@ const Confirmation = () => {
             paid
           </button>
         )}
-        <div>
-          <img src={click} alt="success" className="h-[150px] w-[150px]" />
-        </div>
-        <h3>Click the "paid" button to confirm payment</h3>
+        <h3 className="font-medium">Click "paid" button to confirm payment</h3>
       </div>
     </div>
   );

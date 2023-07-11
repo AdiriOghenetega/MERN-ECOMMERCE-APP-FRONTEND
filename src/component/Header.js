@@ -21,6 +21,8 @@ const Header = () => {
   const location = localStorage.getItem("location");
   const currentRoute = useLocation();
 
+  console.log(currentRoute.pathname)
+
   const isMobile = useMediaQuery({ query: "(max-width: 767px)" });
 
   const handleShowMenu = () => {
@@ -36,7 +38,7 @@ const Header = () => {
 
   const cartItemNumber = useSelector((state) => state.product.cartItem);
   return (
-    <header className="fixed shadow-md w-full h-16 px-2 md:px-4 bg-white/[0.5] z-50">
+    <header className={`fixed shadow-md w-full h-16 px-2 md:px-4 bg-white/[0.5] z-50 ${currentRoute.pathname === "/confirmation" || currentRoute.pathname === "/success" ? "hidden":null}`}>
       <Tooltip id="my-tooltip" />
       {/* desktop */}
 

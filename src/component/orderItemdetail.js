@@ -26,9 +26,11 @@ export default function OrderItemDetails({ elem }) {
                   </div>
                   <div className="flex flex-col items-center justify-between h-[90%]">
                     <h3
-                      className={`font-bold text-[${
-                        elem.orderStatus === "delivered" ? "green" : "red"
-                      }] text-sm md:text-lg`}
+                      className={`font-bold ${
+                        elem.orderStatus === "delivered"
+                          ? "text-green-500"
+                          : "text-red-500"
+                      }`}
                     >
                       {elem.orderStatus}
                     </h3>
