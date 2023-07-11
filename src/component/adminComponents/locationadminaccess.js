@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import { useNavigate } from "react-router-dom";
 
-const UpdateProduct = () => {
+const LocationAdminAccess = () => {
     const navigate = useNavigate();
     const [location, setLocation] = useState("");
     const handleUpdate = (e) => {
@@ -11,7 +11,7 @@ const UpdateProduct = () => {
   return (
     <div>
       <div className="m-auto w-full max-w-[80%] shadow flex flex-col p-3 bg-white/70">
-        <label htmlFor="updateProducts">Update Products</label>
+        <label htmlFor="updateProducts">Choose Location</label>
         <select
           id="updateProducts"
           className="bg-slate-200 p-1 my-1"
@@ -34,4 +34,4 @@ const UpdateProduct = () => {
   )
 }
 
-export default UpdateProduct
+export default LocationAdminAccess

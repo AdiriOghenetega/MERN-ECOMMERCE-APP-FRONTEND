@@ -2,14 +2,15 @@ import React, { useState, useEffect } from "react";
 import { GiHamburger } from "react-icons/gi";
 import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { setOrderData } from "../redux/productSlice";
+import { setOrderData } from "../../redux/productSlice";
 import { GrPrevious, GrNext } from "react-icons/gr";
 import { useNavigate } from "react-router-dom";
 
-const Orders = () => {
+const Orders = ({location}) => {
   const [orderLoading, setOrderLoading] = useState(false);
   const [count, setCount] = useState(0);
   const [displayOrder, setDisplayOrder] = useState([]);
+  
 
   const orderList = useSelector((state) => state.product.orderList);
   const user = useSelector((state) => state.user);
@@ -18,26 +19,35 @@ const Orders = () => {
 
   const navigate = useNavigate();
 
+
   //fetch orders
   useEffect(() => {
-    (async () => {
-      try {
-        setOrderLoading(true);
-        const fetchOrders = await fetch(
-          `${process.env.REACT_APP_BASE_URL}/getorders`
-        );
-        const res = await fetchOrders.json();
-
-        if (res) {
-          res.data && setDisplayOrder(res.data);
-          res.message && toast(res.message);
-          setOrderLoading(false);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    })();
+    fetchOrders()
   }, [orderList]);
+
+  const fetchOrders = async () => {
+    try {
+      setOrderLoading(true);
+      const fetchOrders = await fetch(
+        `${process.env.REACT_APP_BASE_URL}/getorders`
+      );
+      const res = await fetchOrders.json();
+
+      if (res) {
+        let targetOrders = []
+        if(location ){
+         targetOrders = res.data?.filter(elem => elem.location === location)
+         targetOrders && setDisplayOrder(targetOrders?.reverse());
+        }else{
+          res.data && setDisplayOrder(res.data?.reverse());
+        }
+        res.message && toast(res.message);
+        setOrderLoading(false);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const prevOrder = () => {
     if (count > 0) {
@@ -125,6 +135,7 @@ const Orders = () => {
       if (res) {
         res.data && dispatch(setOrderData(res.data));
         setOrderLoading(false);
+        setCount(prev=>prev-1)
         res.message && toast(res.message);
       }}else{
         toast("only admins can perform this action")
@@ -139,12 +150,17 @@ const Orders = () => {
       <div className="m-auto w-full max-w-[95%] md:max-w-[80%] shadow flex flex-col p-3 bg-white/70">
         <h2>Order List</h2>
         <div className="flex justify-between items-center">
-          <button
+          {orderLoading ? <div className="flex flex-col justify-center items-center mt-2">
+                  <GiHamburger
+                    size="25"
+                    className="animate-spin text-[rgb(233,142,30)]"
+                  />
+                </div>:<button
             className="w-fit bg-[rgb(233,142,30)] hover:bg-orange-600 cursor-pointer text-white text-left p-2 rounded mt-4"
-            onClick={() => window.location.reload(true)}
+            onClick={fetchOrders}
           >
             Refresh Order-List
-          </button>
+          </button>}
           <button
             className="w-fit bg-[rgb(233,142,30)] hover:bg-orange-600 cursor-pointer text-white text-left p-2 rounded ml-4 mt-4"
             onClick={deleteOrderList}
@@ -236,6 +252,9 @@ const Orders = () => {
             </h2>
             <h2 className="text-bold m-auto w-full mt-4 shadow flex flex-col p-3 bg-slate-300/70">
               Order Time : {displayOrder[count]?.createdAt}
+            </h2>
+            <h2 className="text-bold m-auto w-full mt-4 shadow flex flex-col p-3 bg-slate-300/70">
+              Restaurant Location : {displayOrder[count]?.location}
             </h2>
             <h2 className="text-bold m-auto w-full mt-4 shadow flex flex-col p-3 bg-slate-300/70">
               Order Reference : {displayOrder[count]?.transactionReference}

@@ -6,7 +6,7 @@ const Success = () => {
   const location = localStorage.getItem("location");
   return (
     <div>
-      <div className="w-fit p-[50px] md:p-[100px] rounded-xl m-auto min-h-[calc(100vh-8em)] flex flex-col justify-center items-center font-semibold text-lg mt-6">
+      <div className="w-fit p-[50px] md:p-[100px] rounded-xl m-auto min-h-[calc(100vh-14em)] flex flex-col justify-center items-center font-semibold text-lg mt-6">
       <div>
         <img src={success} alt="success" className="h-[50px] w-[50px]"  />
       </div>

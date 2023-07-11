@@ -1,11 +1,18 @@
 import avatar from "../assets/login-animation.gif";
 import { FaPhoneAlt } from "react-icons/fa";
+import { MdCancel } from "react-icons/md";
 
 export default function OrderItemDetails({ elem }) {
   return (
-    <div className="h-full w-full md:flex items-center bg-[rgb(254,235,228)]">
+    <div className="h-full w-full md:flex flex-col items-center bg-[rgb(254,235,228)]">
+      <div className="flex flex-row items-center justify-between w-full md:w-[90%] mt-8">
+              <h3 className="font-bold text-[20px]">Order Details</h3>
+              <div className="m-2 text-[rgb(233,142,30)] cursor-pointer ">
+                <MdCancel size="25px" />
+              </div>
+            </div>
       {elem && (
-        <div className="w-full h-full md:flex flex-col md:p-10 rounded ">
+        <div className="w-full h-full md:flex flex-col p-4 md:p-10 rounded ">
           <div>
             {elem?.cart?.map((item, index) => {
               return (

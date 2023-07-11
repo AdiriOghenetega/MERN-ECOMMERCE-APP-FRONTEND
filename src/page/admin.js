@@ -1,7 +1,8 @@
 import React from "react";
-import Tabs from "../component/tab";
+import Tabs from "../component/adminComponents/tab";
 
 const Admin = () => {
+  
   return (
     <div className="p-4 bg-white">
       <Tabs />

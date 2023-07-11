@@ -57,7 +57,7 @@ const Confirmation = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center w-full min-h-[calc(100vh-8em)]">
+    <div className="flex flex-col justify-center items-center w-full min-h-[calc(100vh-14em)]">
       <div className="m-auto flex flex-col justify-center items-center">
         <div className="flex flex-col justify-center items-center my-4">
       <h3 className="font-bold">Transaction reference : </h3>

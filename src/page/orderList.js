@@ -38,7 +38,7 @@ export default function OrderList() {
   };
 
   return (
-    <div className="px-4 md:px-10 py-4">
+    <div className="px-4 md:px-10 py-4 bg-white">
       <Tooltip id="my-tooltip" />
       <div className="flex flex-row items-center justify-between ">
         <h3 className="text-[18px] font-bold text-[rgb(237,139,27)]">

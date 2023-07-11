@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import Orders from "../component/order";
-import UploadProduct from "../component/uploadproduct";
-import UserRole from "../component/userrole";
-import DeleteProduct from "../component/deleteproduct";
-import Banner from "../component/banner";
-import UpdateProduct from "./updateproduct";
+import Orders from "./order";
+import LocationAdminAccess from "./locationadminaccess";
+import UserRole from "./userrole";
+import DeleteProduct from "./deleteproduct";
+import Banner from "./banner";
+import UploadProduct from "./uploadproduct"
+
 
 const Tabs = () => {
   const [activeTab, setActiveTab] = useState("first");
@@ -23,10 +24,6 @@ const Tabs = () => {
       eventKey: "second",
     },
     {
-      label: "Update Products",
-      eventKey: "sixth",
-    },
-    {
       label: "Delete Products",
       eventKey: "third",
     },
@@ -38,13 +35,17 @@ const Tabs = () => {
       label: "Upload Banner",
       eventKey: "fifth",
     },
+    {
+      label: "Location Admin Dashboard",
+      eventKey: "sixth",
+    },
   ];
 
   return (
     <div className="md:flex w-full">
       <div className="md:w-[25%] p-2 flex flex-col justify-start items-start border-2 mb-2">
         <h1 className="bg-[rgb(233,142,30)] text-xl text-white text-bold w-full p-4 flex flex-col justify-center items-center ">
-          DASHBOARD
+          GENERAL DASHBOARD
         </h1>
         {tabs.map((tab, index) => (
           <button
@@ -64,7 +65,7 @@ const Tabs = () => {
         {activeTab === "third" && <DeleteProduct />}
         {activeTab === "fourth" && <Orders />}
         {activeTab === "fifth" && <Banner />}
-        {activeTab === "sixth" && <UpdateProduct />}
+        {activeTab === "sixth" && <LocationAdminAccess />}
       </div>
     </div>
   );

@@ -3,13 +3,12 @@ import { useSelector, useDispatch } from "react-redux";
 import CartProduct from "../component/cartProduct";
 import emptyCartImage from "../assets/empty-cart.gif";
 import { toast } from "react-hot-toast";
-import { setCartData } from "../redux/productSlice";
 import { Link, useNavigate } from "react-router-dom";
 import { GiHamburger } from "react-icons/gi";
-import { BsArrowDownShort } from "react-icons/bs";
+import { BsArrowDownShort, BsArrowUpShort } from "react-icons/bs";
 import { deliveryLocationRedux } from "../redux/locationSlice";
 import { addGuestRedux } from "../redux/guestSlice";
-import {setOrderData,setCurrentOrderData} from "../redux/orderSlice"
+import { setOrderData, setCurrentOrderData } from "../redux/orderSlice";
 import {
   locationData,
   distance,
@@ -22,7 +21,6 @@ const Cart = () => {
   const deliveryLocation = useSelector(
     (state) => state.location?.deliveryLocation
   );
-
 
   const user = useSelector((state) => state.user);
 
@@ -43,7 +41,7 @@ const Cart = () => {
     longitude: locationData[location]?.longitude,
   });
   const [distanceDelivery, setDistanceDelivery] = useState("");
-  const [addressDropdown,setAddressDropdown]=useState(false)
+  const [addressDropdown, setAddressDropdown] = useState(false);
 
   const subTotal = productCartItem.reduce(
     (acc, curr) => acc + parseInt(curr.total),
@@ -131,10 +129,10 @@ const Cart = () => {
           body: JSON.stringify({
             vat,
             subTotal,
-            deliveryCharge:logistics,
+            deliveryCharge: logistics,
             amount: totalPrice,
             userID: user?._id && user._id,
-            email:user?.email && user.email,
+            email: user?.email && user.email,
             guest: guestData,
             userType: user?._id ? "registered" : "guest",
             method: "online",
@@ -143,16 +141,16 @@ const Cart = () => {
             reference: data?.data?.reference,
             cartData: productCartItem,
             location: location,
-            deliveryLocation : customerLocation,
+            deliveryLocation: customerLocation,
           }),
         }
       );
 
       const orderData = await orderRes.json();
       console.log(orderData);
-      dispatch(setOrderData(orderData.orderList))
-        dispatch(setCurrentOrderData(orderData.currentOrder))
-        guestData && dispatch(addGuestRedux(guestData))
+      dispatch(setOrderData(orderData.orderList));
+      dispatch(setCurrentOrderData(orderData.currentOrder));
+      guestData && dispatch(addGuestRedux(guestData));
       setPaymentLoading(false);
       toast("Redirect to payment Gateway...!");
       window.location.href = data.data.authorization_url;
@@ -163,8 +161,7 @@ const Cart = () => {
     }
   };
 
-  const handleAddressDropdown= ()=>setAddressDropdown(prev=>!prev)
-
+  const handleAddressDropdown = () => setAddressDropdown((prev) => !prev);
 
   return (
     <div className="bg-white h-[calc(100vh-4rem)] ">
@@ -193,25 +190,45 @@ const Cart = () => {
             </div>
 
             <div className="w-full max-w-md  ml-auto bg-[rgb(255,255,255,.8)] p-2 max-h-fit">
-            <div className="mb-4 ">
-              <div className="flex justify-between items-center border-2 cursor-pointer border-slate-200 hover:bg-slate-200 rounded" onClick={handleAddressDropdown}>
-              <h2 className="p-2 text-lg">Choose delivery address</h2>
-                <BsArrowDownShort size="25px" className="text-[rgb(233,142,30)]" />
+              <div className="mb-4 ">
+                <div
+                  className="flex justify-between items-center border-2 cursor-pointer border-slate-200 hover:bg-slate-200 rounded"
+                  onClick={handleAddressDropdown}
+                >
+                  <h2 className="p-2 text-lg">Choose delivery address</h2>
+                  {addressDropdown ? (
+                    <BsArrowUpShort
+                      size="25px"
+                      className="text-[rgb(233,142,30)]"
+                    />
+                  ) : (
+                    <BsArrowDownShort
+                      size="25px"
+                      className="text-[rgb(233,142,30)]"
+                    />
+                  )}
+                </div>
+                {addressDropdown && (
+                  <ChooseAddress
+                    handleAddressDropdown={handleAddressDropdown}
+                    userLocation={userLocation}
+                  />
+                )}
               </div>
-              {addressDropdown && <ChooseAddress handleAddressDropdown={handleAddressDropdown} userLocation={userLocation} />}
-            </div>
               <h2 className="bg-blue-500 text-white p-2 text-lg">Summary</h2>
               <div className="flex w-full py-2 text-lg border-b">
                 <p>Vat</p>
                 <p className="ml-auto w-32 font-bold">
                   <span className="text-green-500">₦</span> {vat}
                 </p>
-              </div> <div className="flex w-full py-2 text-lg border-b">
+              </div>{" "}
+              <div className="flex w-full py-2 text-lg border-b">
                 <p>Delivery Charge</p>
                 <p className="ml-auto w-32 font-bold">
                   <span className="text-green-500">₦</span> {logistics}
                 </p>
-              </div> <div className="flex w-full py-2 text-lg border-b">
+              </div>{" "}
+              <div className="flex w-full py-2 text-lg border-b">
                 <p>subTotal</p>
                 <p className="ml-auto w-32 font-bold">
                   <span className="text-green-500">₦</span> {subTotal}
@@ -303,7 +320,8 @@ const Cart = () => {
                   onClick={() =>
                     Object.values(deliveryLocation).length
                       ? handlePayment()
-                      : toast("Choose delivery address")}
+                      : toast("Choose delivery address")
+                  }
                 >
                   Proceed To Payment
                 </button>

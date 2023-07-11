@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { toast } from "react-hot-toast";
 import { BsCloudUpload } from "react-icons/bs";
 import { GiHamburger } from "react-icons/gi";
-import { ImagetoBase64 } from "../utility/ImagetoBase64";
+import { ImagetoBase64 } from "../../utility/ImagetoBase64";
 import { useSelector } from "react-redux";
 import Select from "react-select";
 

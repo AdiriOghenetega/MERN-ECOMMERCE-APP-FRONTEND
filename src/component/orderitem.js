@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import OrderItemDetails from "./orderItemdetail";
-import { MdCancel } from "react-icons/md";
+
 
 export default function OrderItem({ elem }) {
   const [detailsModal, setDetailsModal] = useState(false);
@@ -11,14 +11,8 @@ export default function OrderItem({ elem }) {
       className="relative w-full cursor-pointer"
     >
       {detailsModal && (
-        <div className="absolute top-20 h-full w-full min-h-full min-w-full bg-transparent backdrop-blur-[2px] z-40 flex flex-col justify-start items-center ">
-          <div className="bg-[rgb(254,235,228)] md:w-[70%] p-2 md:p-10">
-            <div className="flex flex-row items-center justify-between w-full ">
-              <h3 className="font-bold text-[20px]">Order Details</h3>
-              <div className="m-2 text-[rgb(233,142,30)] cursor-pointer ">
-                <MdCancel size="25px" />
-              </div>
-            </div>
+        <div className="absolute top-20 w-full min-w-full bg-transparent backdrop-blur-[2px] z-40 flex flex-col justify-start items-center ">
+          <div className=" h-auto md:w-[70%] p-2 md:p-10">
             <OrderItemDetails elem={elem} />
           </div>
         </div>

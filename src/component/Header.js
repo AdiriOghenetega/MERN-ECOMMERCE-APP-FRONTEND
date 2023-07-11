@@ -21,7 +21,6 @@ const Header = () => {
   const location = localStorage.getItem("location");
   const currentRoute = useLocation();
 
-  console.log(currentRoute.pathname)
 
   const isMobile = useMediaQuery({ query: "(max-width: 767px)" });
 
