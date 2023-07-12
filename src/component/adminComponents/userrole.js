@@ -7,6 +7,7 @@ const UserRole = () => {
   const [roleData, setRoleData] = useState({
     user_email: "",
     role: "",
+    location:""
   });
   const [roleLoading, setRoleLoading] = useState(false);
 
@@ -44,6 +45,7 @@ const UserRole = () => {
         setRoleData({
           user_email: "",
           role: "",
+          location:""
         });
       }
     } catch (error) {
@@ -59,21 +61,35 @@ const UserRole = () => {
           type={"text"}
           id="user_email"
           name="user_email"
-          className="bg-slate-200 p-1 my-1"
+          className="bg-slate-200 p-2 my-1"
           onChange={handleRoleChange}
           value={roleData.user_email}
         />
-        <label htmlFor="role">Change User Role</label>
+        <label htmlFor="role">Choose User Role</label>
         <select
-          className="bg-slate-200 p-1 my-1"
+          className="bg-slate-200 p-2 my-1"
           id="role"
           name="role"
           onChange={handleRoleChange}
           value={roleData.role}
         >
           <option>Select Role</option>
-          <option value={"admin"}>admin</option>
           <option value={"user"}>user</option>
+          <option value={"admin"}>admin</option>
+          <option value={"super_admin"}>super admin</option>
+        </select>
+        <label htmlFor="location">Choose Role location</label>
+        <select
+          className="bg-slate-200 p-2 my-1"
+          id="location"
+          name="location"
+          onChange={handleRoleChange}
+          value={roleData.location}
+        >
+          <option>Select Location</option>
+          <option value="Abuloma">Abuloma</option>
+          <option value="Rumuodara">Rumuodara</option>
+          <option value="Phrc">Phrc</option>
         </select>
         {roleLoading ? (
           <div className="flex flex-col justify-center items-center mt-4">

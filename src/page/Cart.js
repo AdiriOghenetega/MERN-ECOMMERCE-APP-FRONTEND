@@ -148,6 +148,7 @@ const Cart = () => {
 
       const orderData = await orderRes.json();
       console.log(orderData);
+      orderData?.message && toast(orderData.message)
       dispatch(setOrderData(orderData.orderList));
       dispatch(setCurrentOrderData(orderData.currentOrder));
       guestData && dispatch(addGuestRedux(guestData));

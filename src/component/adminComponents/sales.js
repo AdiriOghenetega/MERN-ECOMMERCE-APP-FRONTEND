@@ -22,6 +22,18 @@ const Sales = ({ location }) => {
     (acc, curr) => acc + parseInt(curr.amount),
     0
   );
+
+  let weeklyChartData = []
+  for(let i=0;i<7;i++){
+    let numOfSales = weeklySales?.filter(el=>new Date(el.createdAt).getDay() === i)
+    let totalNumOfSales = numOfSales?.length
+    weeklyChartData.push({
+      day: parseInt(i)+1,
+      "Number of sales":parseInt(totalNumOfSales)
+    })
+  }
+
+  
   const monthlySales = displayOrder?.filter(
     (elem) =>
       parseInt(dayInYear) - parseInt(dayOfYear(new Date(elem.createdAt))) <= 31
@@ -30,6 +42,19 @@ const Sales = ({ location }) => {
     (acc, curr) => acc + parseInt(curr.amount),
     0
   );
+
+  let monthlyChartData = []
+  for(let i=0;i<31;i++){
+    let numOfSales = monthlySales?.filter(el=>new Date(el.createdAt).getDate() === i)
+    let totalNumOfSales = numOfSales?.length
+    monthlyChartData.push({
+      day: parseInt(i)+1,
+      "Number of sales":parseInt(totalNumOfSales)
+    })
+  }
+
+
+
   const yearlySales = displayOrder?.filter(
     (elem) =>
       parseInt(dayInYear) - parseInt(dayOfYear(new Date(elem.createdAt))) <= 366
@@ -38,6 +63,16 @@ const Sales = ({ location }) => {
     (acc, curr) => acc + parseInt(curr.amount),
     0
   );
+
+  let yearlyChartData = []
+  for(let i=0;i<366;i++){
+    let numOfSales = yearlySales?.filter(el=>dayOfYear(new Date(el.createdAt)) === i)
+    let totalNumOfSales = numOfSales?.length
+    yearlyChartData.push({
+      day: parseInt(i)+1,
+      "Number of sales":parseInt(totalNumOfSales)
+    })
+  }
 
   //fetch orders
   useEffect(() => {
@@ -77,18 +112,24 @@ const Sales = ({ location }) => {
     <div>
       <SalesBracket
         title="Sales for the past week"
+        title2="Sales Growth Rate For Past Week"
         sales={weeklySales}
         totalSales={weeklyTotalSales}
+        chartData={weeklyChartData}
       />
       <SalesBracket
         title="Sales for the past month"
+        title2="Sales Growth Rate For Past Month"
         sales={monthlySales}
         totalSales={monthlyTotalSales}
+        chartData={monthlyChartData}
       />
       <SalesBracket
         title="Sales for the past year"
+        title2="Sales Growth Rate For Past Year"
         sales={yearlySales}
         totalSales={yearlyTotalSales}
+        chartData={yearlyChartData}
       />
     </div>
   );

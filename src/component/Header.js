@@ -130,12 +130,12 @@ const Header = () => {
             </div>
             {showMenu && (
               <div className="absolute right-2 bg-white py-2  shadow drop-shadow-md flex flex-col min-w-[120px] text-center">
-                <Link
+                {(userData?.role?.toLowerCase() === "admin" || userData?.role?.toLowerCase() === "super_admin") && <Link
                   to={"admin"}
                   className="whitespace-nowrap cursor-pointer px-2"
                 >
                   Admin Dashboard
-                </Link>
+                </Link>}
 
                 {userData.firstName ? (
                   <p

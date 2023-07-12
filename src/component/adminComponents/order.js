@@ -1,29 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { GiHamburger } from "react-icons/gi";
 import { toast } from "react-hot-toast";
-import { useDispatch, useSelector } from "react-redux";
-import { setOrderData } from "../../redux/productSlice";
+import { useSelector } from "react-redux";
 import { GrPrevious, GrNext } from "react-icons/gr";
 import { useNavigate } from "react-router-dom";
 
-const Orders = ({location}) => {
+const Orders = ({ location }) => {
   const [orderLoading, setOrderLoading] = useState(false);
   const [count, setCount] = useState(0);
   const [displayOrder, setDisplayOrder] = useState([]);
-  
+  const [refreshPage, setRefreshPage] = useState(false);
 
-  const orderList = useSelector((state) => state.product.orderList);
   const user = useSelector((state) => state.user);
-
-  const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
-
   //fetch orders
   useEffect(() => {
-    fetchOrders()
-  }, [orderList]);
+    fetchOrders();
+    setRefreshPage(false);
+  }, [refreshPage]);
 
   const fetchOrders = async () => {
     try {
@@ -34,11 +30,11 @@ const Orders = ({location}) => {
       const res = await fetchOrders.json();
 
       if (res) {
-        let targetOrders = []
-        if(location ){
-         targetOrders = res.data?.filter(elem => elem.location === location)
-         targetOrders && setDisplayOrder(targetOrders?.reverse());
-        }else{
+        let targetOrders = [];
+        if (location) {
+          targetOrders = res.data?.filter((elem) => elem.location === location);
+          targetOrders && setDisplayOrder(targetOrders?.reverse());
+        } else {
           res.data && setDisplayOrder(res.data?.reverse());
         }
         res.message && toast(res.message);
@@ -63,25 +59,27 @@ const Orders = ({location}) => {
 
   const updateOrderStatus = async () => {
     try {
-      if(displayOrder[count]._id &&  user._id){setOrderLoading(true);
-      const updateOrders = await fetch(
-        `${process.env.REACT_APP_BASE_URL}/updateorder?order_id=${displayOrder[count]._id}&user_id=${user._id}`,
-        {
-          method: "PUT",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify({ orderStatus: "delivered" }),
-        }
-      );
-      const res = await updateOrders.json();
+      if (displayOrder[count]._id && user._id) {
+        setOrderLoading(true);
+        const updateOrders = await fetch(
+          `${process.env.REACT_APP_BASE_URL}/updateorder?order_id=${displayOrder[count]._id}&user_id=${user._id}`,
+          {
+            method: "PUT",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify({ orderStatus: "delivered" }),
+          }
+        );
+        const res = await updateOrders.json();
 
-      if (res) {
-        res.data && dispatch(setOrderData(res.data));
-        setOrderLoading(false);
-        res.message && toast(res.message);
-      }}else{
-        toast("only admins can perform this action")
+        if (res) {
+          setRefreshPage(true);
+          setOrderLoading(false);
+          res.message && toast(res.message);
+        }
+      } else {
+        toast("only admins can perform this action");
       }
     } catch (error) {
       console.log(error);
@@ -99,13 +97,13 @@ const Orders = ({location}) => {
             headers: {
               "content-type": "application/json",
             },
-            body: JSON.stringify(orderList),
+            body: JSON.stringify(displayOrder),
           }
         );
         const res = await deleteOrder.json();
 
         if (res) {
-          res.data && dispatch(setOrderData(res.data));
+          setRefreshPage(true);
           setOrderLoading(false);
           res.message && toast(res.message);
         }
@@ -119,26 +117,30 @@ const Orders = ({location}) => {
 
   const DeleteOrder = async () => {
     try {
-      if(displayOrder[count]._id && user._id){setOrderLoading(true);
-      const deleteOrder = await fetch(
-        `${process.env.REACT_APP_BASE_URL}/deleteone?order_id=${displayOrder[count]._id}&user_id=${user._id}`,
-        {
-          method: "DELETE",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(orderList),
-        }
-      );
-      const res = await deleteOrder.json();
+      if (displayOrder[count]._id && user._id) {
+        setOrderLoading(true);
+        const deleteOrder = await fetch(
+          `${process.env.REACT_APP_BASE_URL}/deleteone?order_id=${displayOrder[count]._id}&user_id=${user._id}`,
+          {
+            method: "DELETE",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(displayOrder),
+          }
+        );
+        const res = await deleteOrder.json();
 
-      if (res) {
-        res.data && dispatch(setOrderData(res.data));
-        setOrderLoading(false);
-        setCount(prev=>prev-1)
-        res.message && toast(res.message);
-      }}else{
-        toast("only admins can perform this action")
+        if (res) {
+          count >= displayOrder?.length - 1
+            ? setCount((prev) => prev - 1)
+            : setCount((prev) => prev + 1);
+          setRefreshPage(true);
+          setOrderLoading(false);
+          res.message && toast(res.message);
+        }
+      } else {
+        toast("only admins can perform this action");
       }
     } catch (error) {
       console.log(error);
@@ -150,17 +152,21 @@ const Orders = ({location}) => {
       <div className="m-auto w-full max-w-[95%] md:max-w-[80%] shadow flex flex-col p-3 bg-white/70">
         <h2>Order List</h2>
         <div className="flex justify-between items-center">
-          {orderLoading ? <div className="flex flex-col justify-center items-center mt-2">
-                  <GiHamburger
-                    size="25"
-                    className="animate-spin text-[rgb(233,142,30)]"
-                  />
-                </div>:<button
-            className="w-fit bg-[rgb(233,142,30)] hover:bg-orange-600 cursor-pointer text-white text-left p-2 rounded mt-4"
-            onClick={fetchOrders}
-          >
-            Refresh Order-List
-          </button>}
+          {orderLoading ? (
+            <div className="flex flex-col justify-center items-center mt-2">
+              <GiHamburger
+                size="25"
+                className="animate-spin text-[rgb(233,142,30)]"
+              />
+            </div>
+          ) : (
+            <button
+              className="w-fit bg-[rgb(233,142,30)] hover:bg-orange-600 cursor-pointer text-white text-left p-2 rounded mt-4"
+              onClick={fetchOrders}
+            >
+              Refresh Order-List
+            </button>
+          )}
           <button
             className="w-fit bg-[rgb(233,142,30)] hover:bg-orange-600 cursor-pointer text-white text-left p-2 rounded ml-4 mt-4"
             onClick={deleteOrderList}
@@ -286,12 +292,14 @@ const Orders = ({location}) => {
               >
                 Delete Order
               </button>
-              {displayOrder[count]?.orderStatus === "pending" && <button
-                    className="bg-[rgb(233,142,30)] ml-2 hover:bg-orange-600 text-white font-medium p-2 w-fit rounded my-2 drop-shadow m-auto"
-                    onClick={()=>navigate(`/order/${displayOrder[count]?._id}`)}
-                  >
-                    Initiate Order Delivery
-                  </button>}
+              {displayOrder[count]?.orderStatus === "pending" && (
+                <button
+                  className="bg-[rgb(233,142,30)] ml-2 hover:bg-orange-600 text-white font-medium p-2 w-fit rounded my-2 drop-shadow m-auto"
+                  onClick={() => navigate(`/order/${displayOrder[count]?._id}`)}
+                >
+                  Initiate Order Delivery
+                </button>
+              )}
             </div>
           </div>
         ) : orderLoading ? (
@@ -306,9 +314,7 @@ const Orders = ({location}) => {
             You have no orders at the moment
           </h2>
         )}
-        
       </div>
-      
     </div>
   );
 };

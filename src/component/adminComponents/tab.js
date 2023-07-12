@@ -28,16 +28,12 @@ const Tabs = () => {
       eventKey: "third",
     },
     {
-      label: "Orders",
+      label: "Upload Banner",
       eventKey: "fourth",
     },
     {
-      label: "Upload Banner",
-      eventKey: "fifth",
-    },
-    {
       label: "Location Admin Dashboard",
-      eventKey: "sixth",
+      eventKey: "fifth",
     },
   ];
 
@@ -63,9 +59,8 @@ const Tabs = () => {
         {activeTab === "first" && <UserRole />}
         {activeTab === "second" && <UploadProduct />}
         {activeTab === "third" && <DeleteProduct />}
-        {activeTab === "fourth" && <Orders />}
-        {activeTab === "fifth" && <Banner />}
-        {activeTab === "sixth" && <LocationAdminAccess />}
+        {activeTab === "fourth" && <Banner />}
+        {activeTab === "fifth" && <LocationAdminAccess />}
       </div>
     </div>
   );

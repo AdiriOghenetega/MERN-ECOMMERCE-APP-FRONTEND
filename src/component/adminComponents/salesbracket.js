@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { BsArrowDownShort, BsArrowUpShort } from "react-icons/bs";
+import MyLineChart from "./linechart";
 
-const SalesBracket = ({ sales, totalSales, title }) => {
+const SalesBracket = ({ sales, totalSales, title,chartData,title2 }) => {
   const [openBracket, setOpenBracket] = useState(false);
 
   return (
@@ -10,7 +11,7 @@ const SalesBracket = ({ sales, totalSales, title }) => {
         className="flex justify-between items-center cursor-pointer"
         onClick={() => setOpenBracket((prev) => !prev)}
       >
-        <h2 className="font-bold text-lg">{title}</h2>
+        <h2 className="font-medium">{title}</h2>
         {openBracket ? (
           <BsArrowUpShort size="25px" className="text-[rgb(233,142,30)]" />
         ) : (
@@ -31,7 +32,7 @@ const SalesBracket = ({ sales, totalSales, title }) => {
                     key={elem._id}
                     className="flex justify-between items-center"
                   >
-                    <div className="flex">
+                    <div className="md:flex">
                       <h3 className="font-bold">Customer Name:</h3>
                       <h3 className="ml-2">
                         {elem?.user?.firstName
@@ -67,6 +68,9 @@ const SalesBracket = ({ sales, totalSales, title }) => {
               <h3 className="text-green-500 font-black ">₦</h3>
               <h3 className=" ">{totalSales}</h3>
             </div>
+          </div>
+          <div className="m-auto w-full mt-4 shadow flex justify-between items-center p-3 bg-slate-200/70">
+            <MyLineChart title={title2} chartData={chartData} />
           </div>
         </div>
       )}
