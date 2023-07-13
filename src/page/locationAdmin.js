@@ -17,7 +17,8 @@ const LocationAdmin = () => {
   useEffect(() => {
     if(storedUser !== null){
       if (user?._id) {
-        if(user?._id?.length <=0 || user?.location?.toLowerCase() !== location?.toLowerCase() ||
+        if(user?._id?.length <=0 || (user?.location?.toLowerCase() !== location?.toLowerCase() &&
+        user?.role?.toLowerCase() !== "super_admin") ||
         (user?.role?.toLowerCase() !== "admin" &&
           user?.role?.toLowerCase() !== "super_admin")){
             toast("You're not authorized to view this page");

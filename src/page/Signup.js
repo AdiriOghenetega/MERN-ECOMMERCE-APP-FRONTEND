@@ -40,7 +40,7 @@ function Signup() {
   };
 
   const handleUploadProfileImage = async(e)=>{
-      const data = await ImagetoBase64(e.target.files[0])
+     try{ const data = await ImagetoBase64(e.target.files[0])
   
 
       setData((preve)=>{
@@ -49,7 +49,10 @@ function Signup() {
             image : data
           }
       })
-
+}catch(error){
+  console.log(error)
+  toast("Network Error , Reload Page")
+}
   }
 
   const handleSubmit = async(e) => {
@@ -57,7 +60,7 @@ function Signup() {
     const { firstName, email, password, confirmPassword,address,mobile } = data;
     if (firstName && email && password && confirmPassword && address && mobile) {
       if (password === confirmPassword) {
-    setLoading(true)
+    try{setLoading(true)
           const fetchData = await fetch(`${process.env.REACT_APP_BASE_URL}/signup`,{
             method : "POST",
             headers : {
@@ -73,7 +76,10 @@ function Signup() {
         if(dataRes.alert){
           navigate("/login");
         }
-       
+       }catch(error){
+        console.log(error)
+        toast("Network Error , Reload Page And Try Again")
+       }
       } else {
         alert("password and confirm password does not match");
       }

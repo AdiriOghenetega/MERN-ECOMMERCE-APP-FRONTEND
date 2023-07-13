@@ -45,7 +45,7 @@ const Login = () => {
     e.preventDefault()
     const {email,password} = data
     if(email && password ){
-      setLoading(true)
+      try{setLoading(true)
       const fetchData = await fetch(`${process.env.REACT_APP_BASE_URL}/login`,{
         method : "POST",
         headers : {
@@ -67,7 +67,10 @@ const Login = () => {
           navigate("/")
         }, 1000);
       }
-
+}catch(error){
+  console.log(error)
+  toast("Network Error , Reload Page And Try Again")
+}
     }
     else{
         alert("Please Enter required fields")

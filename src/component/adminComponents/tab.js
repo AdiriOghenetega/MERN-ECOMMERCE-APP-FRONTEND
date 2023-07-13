@@ -40,7 +40,7 @@ const Tabs = () => {
   return (
     <div className="md:flex w-full">
       <div className="md:w-[25%] p-2 flex flex-col justify-start items-start border-2 mb-2">
-        <h1 className="bg-[rgb(233,142,30)] text-xl text-white text-bold w-full p-4 flex flex-col justify-center items-center ">
+        <h1 className="bg-black text-xl text-white text-bold w-full p-4 flex flex-col justify-center items-center ">
           GENERAL DASHBOARD
         </h1>
         {tabs.map((tab, index) => (

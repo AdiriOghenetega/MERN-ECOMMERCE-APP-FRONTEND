@@ -1,6 +1,7 @@
 import avatar from "../assets/login-animation.gif";
 import { FaPhoneAlt } from "react-icons/fa";
 import { MdCancel } from "react-icons/md";
+import { numberWithCommas } from "../utility/helper";
 
 export default function OrderItemDetails({ elem }) {
   return (
@@ -46,7 +47,7 @@ export default function OrderItemDetails({ elem }) {
                         ₦
                       </h3>
                       <h3 className="font-bold text-black text-sm md:text-lg">
-                        {item.price}
+                        {numberWithCommas(item.price)}
                       </h3>
                     </div>
                   </div>
@@ -65,28 +66,28 @@ export default function OrderItemDetails({ elem }) {
               <h3 className="font-bold text-black ">Vat:</h3>
               <div className="flex flex-row">
                 <h3 className="text-green-500 font-black ">₦</h3>
-                <h3 className="font-bold text-black ">{elem.vat}</h3>
+                <h3 className="font-bold text-black ">{numberWithCommas(elem.vat)}</h3>
               </div>
             </div>
             <div className="w-full my-2 flex flex-row justify-between items-center">
               <h3 className="font-bold text-black ">delivery Charge:</h3>
               <div className="flex flex-row">
                 <h3 className="text-green-500 font-black ">₦</h3>
-                <h3 className="font-bold text-black ">{elem.deliveryCharge}</h3>
+                <h3 className="font-bold text-black ">{numberWithCommas(elem.deliveryCharge)}</h3>
               </div>
             </div>
             <div className="w-full my-2 flex flex-row justify-between items-center">
               <h3 className="font-bold text-black ">subTotal</h3>
               <div className="flex flex-row">
                 <h3 className="text-green-500 font-black ">₦</h3>
-                <h3 className="font-bold text-black ">{elem.subTotal}</h3>
+                <h3 className="font-bold text-black ">{numberWithCommas(elem.subTotal)}</h3>
               </div>
             </div>
             <div className="w-full my-2 flex flex-row justify-between items-center">
               <h3 className="font-bold text-black ">Total:</h3>
               <div className="flex flex-row">
                 <h3 className="text-green-500 font-black ">₦</h3>
-                <h3 className="font-bold text-black ">{elem.amount}</h3>
+                <h3 className="font-bold text-black ">{numberWithCommas(elem.amount)}</h3>
               </div>
             </div>
           </div>

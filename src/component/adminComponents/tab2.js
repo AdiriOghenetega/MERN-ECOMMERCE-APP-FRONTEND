@@ -30,7 +30,7 @@ const Tabs2 = ({ title, location }) => {
   return (
     <div className="md:flex w-full">
       <div className="md:w-[25%] p-2 flex flex-col justify-start items-start border-2 mb-2">
-        <div className="flex bg-[rgb(233,142,30)] w-full p-4">
+        <div className="flex bg-black w-full p-4">
           <BsArrowLeftSquareFill
             size="25px"
             className="text-white cursor-pointer"

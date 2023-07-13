@@ -15,6 +15,7 @@ import {
   deliveryCharge,
 } from "../utility/locationdata";
 import ChooseAddress from "../component/chooseaddress";
+import { numberWithCommas } from "../utility/helper";
 
 const Cart = () => {
   const productCartItem = useSelector((state) => state.product.cartItem);
@@ -95,6 +96,7 @@ const Cart = () => {
       );
     } catch (error) {
       console.log(error);
+      toast("Network Error , Reload Page And Try Again")
     }
   };
 
@@ -110,7 +112,7 @@ const Cart = () => {
 
   const handlePayment = async () => {
     if (user?.mobile || guestData?.mobile) {
-      setPaymentLoading(true);
+     try{ setPaymentLoading(true);
       const res = await fetch(
         `${process.env.REACT_APP_BASE_URL}/payment?amount=${totalPrice}&email=${
           user._id ? user?.email : guestData?.email
@@ -155,6 +157,10 @@ const Cart = () => {
       setPaymentLoading(false);
       toast("Redirect to payment Gateway...!");
       window.location.href = data.data.authorization_url;
+    }catch(error){
+      console.log(error)
+      toast("Network Error , Reload Page And Try Again")
+    }
     } else {
       toast(
         "Kindly login or provide the required details to continue purchase"
@@ -220,19 +226,19 @@ const Cart = () => {
               <div className="flex w-full py-2 text-lg border-b">
                 <p>Vat</p>
                 <p className="ml-auto w-32 font-bold">
-                  <span className="text-green-500">₦</span> {vat}
+                  <span className="text-green-500">₦</span> {numberWithCommas(vat)}
                 </p>
               </div>{" "}
               <div className="flex w-full py-2 text-lg border-b">
                 <p>Delivery Charge</p>
                 <p className="ml-auto w-32 font-bold">
-                  <span className="text-green-500">₦</span> {logistics}
+                  <span className="text-green-500">₦</span> {numberWithCommas(logistics)}
                 </p>
               </div>{" "}
               <div className="flex w-full py-2 text-lg border-b">
                 <p>subTotal</p>
                 <p className="ml-auto w-32 font-bold">
-                  <span className="text-green-500">₦</span> {subTotal}
+                  <span className="text-green-500">₦</span> {numberWithCommas(subTotal)}
                 </p>
               </div>
               <div className="flex w-full py-2 text-lg border-b">
@@ -242,7 +248,7 @@ const Cart = () => {
               <div className="flex w-full py-2 text-lg border-b">
                 <p>Total Price</p>
                 <p className="ml-auto w-32 font-bold">
-                  <span className="text-green-500">₦</span> {totalPrice}
+                  <span className="text-green-500">₦</span> {numberWithCommas(totalPrice)}
                 </p>
               </div>
               {!user?.firstName && (

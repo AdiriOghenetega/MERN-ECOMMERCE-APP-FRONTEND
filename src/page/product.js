@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import AllProduct from "../component/AllProduct";
 import { addCartItem } from "../redux/productSlice";
+import { numberWithCommas } from "../utility/helper";
 
 const Product = () => {
   const { filterby } = useParams();
@@ -36,7 +37,7 @@ const Product = () => {
           <p className=" text-slate-500  font-medium text-2xl">{productDisplay?.category}</p>
           <p className=" font-bold md:text-2xl">
             <span className="text-green-500 ">₦</span>
-            <span>{productDisplay?.price}</span>
+            <span>{numberWithCommas(productDisplay?.price)}</span>
           </p>
           <div className="flex md:gap-3">
           <button onClick={handleBuy} className="bg-[rgb(233,142,30)] py-1 mt-2 rounded hover:bg-orange-600 min-w-[100px]">Buy</button>

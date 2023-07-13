@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { addCartItem } from "../redux/productSlice";
 import {GiHamburger} from "react-icons/gi"
+import { numberWithCommas } from "../utility/helper";
 
 const CardFeature = ({ image, name, price, category, loading, id }) => {
   const dispatch = useDispatch()
@@ -34,7 +35,7 @@ const CardFeature = ({ image, name, price, category, loading, id }) => {
             <p className=" text-slate-500  font-medium">{category}</p>
             <p className=" font-bold">
               <span className="text-green-500">₦</span>
-              <span>{price}</span>
+              <span>{numberWithCommas(price)}</span>
             </p>
           </Link>
           <button

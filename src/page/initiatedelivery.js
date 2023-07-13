@@ -3,9 +3,8 @@ import { toast } from "react-hot-toast";
 import { BsCloudUpload } from "react-icons/bs";
 import { GiHamburger } from "react-icons/gi";
 import { ImagetoBase64 } from "../utility/ImagetoBase64";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useParams,useNavigate } from 'react-router-dom';
-import { setOrderData } from "../redux/productSlice";
 import Select from 'react-select';
 
 const InitiateDelivery = () => {
@@ -18,7 +17,7 @@ const InitiateDelivery = () => {
     const [loading, setLoading] = useState(false);
 
     
-    const dispatch=useDispatch()
+    
     const params = useParams()
     const navigate = useNavigate()
     const {id} = params
@@ -46,14 +45,17 @@ const InitiateDelivery = () => {
       };
 
       const uploadImage = async (e) => {
-        const data = await ImagetoBase64(e.target.files[0]);
+        try{const data = await ImagetoBase64(e.target.files[0]);
     
         setRiderDetails((prev) => {
           return {
             ...prev,
             image: data,
           };
-        });
+        });}catch(error){
+          console.log(error)
+          toast("Network Error , Reload Page And Try Again")
+        }
       };
 
       const initiateorderdelivery = async () => {
@@ -75,7 +77,7 @@ const InitiateDelivery = () => {
           const res = await updateOrders.json();
     
           if (res) {
-            res.data && dispatch(setOrderData(res.data));
+            
             setRiderDetails({
                 name:"",
                 mobile:"",
@@ -91,16 +93,20 @@ const InitiateDelivery = () => {
           }
         } catch (error) {
           console.log(error);
+          toast("Network Error , Reload Page And Try Again")
         }
       };
 
       //fetch rider list
      useEffect(()=>{
       (async()=>{
-          const fetchRiders = await fetch(`${process.env.REACT_APP_BASE_URL}/getriders`)
+         try{ const fetchRiders = await fetch(`${process.env.REACT_APP_BASE_URL}/getriders`)
           const res = await fetchRiders.json()
           if(res){
             res?.data && setRiderList(res.data)
+          }}catch(error){
+            console.log(error)
+            toast("Network Error , Reload Page And Try Again")
           }
       })()
      },[])

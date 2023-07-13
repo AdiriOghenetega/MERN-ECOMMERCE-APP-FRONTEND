@@ -20,19 +20,24 @@ const UpdateProducts = () => {
 
   useEffect(() => {
     (async () => {
-      setLoading(true);
-      const res = await fetch(`${process.env.REACT_APP_BASE_URL}/product`, {
-        credentials: "include",
-      });
-      const resData = await res.json();
+      try {
+        setLoading(true);
+        const res = await fetch(`${process.env.REACT_APP_BASE_URL}/product`, {
+          credentials: "include",
+        });
+        const resData = await res.json();
 
-      setProductData(resData);
-      const availProducts = resData.filter((el) =>
-        el.stores.includes(location)
-      );
-      setAvailProd(availProducts);
-      setLoading(false);
-      setReloadPage(false);
+        setProductData(resData);
+        const availProducts = resData.filter((el) =>
+          el.stores.includes(location)
+        );
+        setAvailProd(availProducts);
+        setLoading(false);
+        setReloadPage(false);
+      } catch (error) {
+        console.log(error);
+        toast("Network Error , Reload Page And Try Again");
+      }
     })();
   }, [reloadPage]);
 
@@ -45,55 +50,65 @@ const UpdateProducts = () => {
   };
 
   const handleTurnOn = async () => {
-    setLoadingOn(true);
-    const fetchData = await fetch(
-      `${process.env.REACT_APP_BASE_URL}/product/turnonproduct/${user._id}`,
-      {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify({
-          location,
-          products: updateList,
-        }),
-      }
-    );
+    try {
+      setLoadingOn(true);
+      const fetchData = await fetch(
+        `${process.env.REACT_APP_BASE_URL}/product/turnonproduct/${user._id}`,
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({
+            location,
+            products: updateList,
+          }),
+        }
+      );
 
-    const dataRes = await fetchData.json();
-    console.log(dataRes);
-    if (dataRes) {
-      setLoadingOn(false);
-      setUpdateList([]);
-      toast(dataRes.message);
-      setReloadPage(true);
+      const dataRes = await fetchData.json();
+      console.log(dataRes);
+      if (dataRes) {
+        setLoadingOn(false);
+        setUpdateList([]);
+        toast(dataRes.message);
+        setReloadPage(true);
+      }
+    } catch (error) {
+      console.log(error);
+      toast("Network Error , Reload Page And Try Again");
     }
   };
 
   const handleTurnOff = async () => {
-    setLoadingOff(true);
-    const fetchData = await fetch(
-      `${process.env.REACT_APP_BASE_URL}/product/turnoffproduct/${user._id}`,
-      {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify({
-          location,
-          products: updateList,
-        }),
+    try {
+      setLoadingOff(true);
+      const fetchData = await fetch(
+        `${process.env.REACT_APP_BASE_URL}/product/turnoffproduct/${user._id}`,
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({
+            location,
+            products: updateList,
+          }),
+        }
+      );
+
+      const dataRes = await fetchData.json();
+
+      console.log(dataRes);
+      if (dataRes) {
+        setLoadingOff(false);
+        setUpdateList([]);
+        toast(dataRes.message);
+        setReloadPage(true);
       }
-    );
-
-    const dataRes = await fetchData.json();
-
-    console.log(dataRes);
-    if (dataRes) {
-      setLoadingOff(false);
-      setUpdateList([]);
-      toast(dataRes.message);
-      setReloadPage(true);
+    } catch (error) {
+      console.log(error);
+      toast("Network Error , Reload Page And Try Again");
     }
   };
 

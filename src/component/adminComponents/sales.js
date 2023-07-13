@@ -9,8 +9,6 @@ const Sales = ({ location }) => {
 
   const [displayOrder, setDisplayOrder] = useState([]);
 
-  const orderList = useSelector((state) => state.product.orderList);
-  const user = useSelector((state) => state.user);
   const currentDate = new Date();
   const dayInYear = dayOfYear(currentDate);
 
@@ -100,6 +98,7 @@ const Sales = ({ location }) => {
       }
     } catch (error) {
       console.log(error);
+      toast("Network Error , Reload Page And Try Again")
     }
   };
 

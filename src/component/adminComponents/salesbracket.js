@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { BsArrowDownShort, BsArrowUpShort } from "react-icons/bs";
 import MyLineChart from "./linechart";
+import { numberWithCommas } from "../../utility/helper";
 
-const SalesBracket = ({ sales, totalSales, title,chartData,title2 }) => {
+const SalesBracket = ({ sales, totalSales, title, chartData, title2 }) => {
   const [openBracket, setOpenBracket] = useState(false);
 
   return (
@@ -46,7 +47,7 @@ const SalesBracket = ({ sales, totalSales, title,chartData,title2 }) => {
                       <h3 className="font-bold">Amount:</h3>
                       <div className="flex flex-row">
                         <h3 className="text-green-500 font-black ">₦</h3>
-                        <h3 className=" ">{elem.amount}</h3>
+                        <h3 className=" ">{numberWithCommas(elem.amount)}</h3>
                       </div>
                     </div>
                     <div className="my-2 flex flex-col justify-between items-center">
@@ -61,14 +62,15 @@ const SalesBracket = ({ sales, totalSales, title,chartData,title2 }) => {
             )}
           </div>
           <div className="m-auto w-full mt-4 shadow flex justify-between items-center p-3 bg-slate-200/70">
-            <div>
-              <h3 className="font-bold">Total:</h3>
-            </div>
+          <div className="px-14 py-5 mx-auto bg-white rounded-xl">
+            <h3 >Total Sales</h3>
             <div className="flex flex-row">
-              <h3 className="text-green-500 font-black ">₦</h3>
-              <h3 className=" ">{totalSales}</h3>
+              <h3 className="text-green-500 font-bold text-3xl">₦</h3>
+              <h3 className="text-3xl text-slate-800 font-bold">{numberWithCommas(totalSales)}</h3>
             </div>
           </div>
+          </div>
+          
           <div className="m-auto w-full mt-4 shadow flex justify-between items-center p-3 bg-slate-200/70">
             <MyLineChart title={title2} chartData={chartData} />
           </div>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import OrderItemDetails from "./orderItemdetail";
-
+import { numberWithCommas } from "../utility/helper";
 
 export default function OrderItem({ elem }) {
   const [detailsModal, setDetailsModal] = useState(false);
@@ -53,7 +53,9 @@ export default function OrderItem({ elem }) {
             <div className="flex flex-row justify-center items-center bg-white rounded m-2 px-6 py-4">
               <div className="flex flex-row">
                 <h3 className="text-green-500 font-black">₦</h3>
-                <h3 className="font-bold text-black">{elem.amount}</h3>
+                <h3 className="font-bold text-black">
+                  {numberWithCommas(elem.amount)}
+                </h3>
               </div>
             </div>
           </div>

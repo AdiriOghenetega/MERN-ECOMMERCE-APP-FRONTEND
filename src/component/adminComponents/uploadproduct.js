@@ -47,50 +47,60 @@ const UploadProduct = () => {
   };
 
   const uploadImage = async (e) => {
-    const data = await ImagetoBase64(e.target.files[0]);
+    try {
+      const data = await ImagetoBase64(e.target.files[0]);
 
-    setData((prev) => {
-      return {
-        ...prev,
-        image: data,
-      };
-    });
+      setData((prev) => {
+        return {
+          ...prev,
+          image: data,
+        };
+      });
+    } catch (error) {
+      console.log(error);
+      toast("Network Error , Reload Page And Try Again");
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     const { name, image, category, price, stores } = data;
 
     if (name && image && category && price && stores) {
-      setLoading(true);
-      const fetchData = await fetch(
-        `${process.env.REACT_APP_BASE_URL}/uploadProduct/${user?._id}`,
-        {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(data),
-        }
-      );
+      try {
+        setLoading(true);
+        const fetchData = await fetch(
+          `${process.env.REACT_APP_BASE_URL}/uploadProduct/${user?._id}`,
+          {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(data),
+          }
+        );
 
-      const fetchRes = await fetchData.json();
+        const fetchRes = await fetchData.json();
 
-      console.log(fetchRes);
-      toast(fetchRes.message);
-      setLoading(false);
+        console.log(fetchRes);
+        toast(fetchRes.message);
+        setLoading(false);
 
-      setData(() => {
-        return {
-          name: "",
-          category: "",
-          image: "",
-          price: "",
-          description: "",
-          stores: [],
-        };
-      });
+        setData(() => {
+          return {
+            name: "",
+            category: "",
+            image: "",
+            price: "",
+            description: "",
+            stores: [],
+          };
+        });
+      } catch (error) {
+        console.log(error);
+        toast("Network Error , Reload Page And Try Again");
+      }
     } else {
       toast("Enter required Fields");
     }

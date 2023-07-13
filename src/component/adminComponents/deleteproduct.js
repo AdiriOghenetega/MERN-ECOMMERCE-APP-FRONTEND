@@ -16,13 +16,18 @@ const DeleteProduct = () => {
 
   useEffect(() => {
     (async () => {
-      setLoading(true);
-      const res = await fetch(`${process.env.REACT_APP_BASE_URL}/product`, {
-        credentials: "include",
-      });
-      const resData = await res.json();
-      setProductData(resData);
-      setLoading(false);
+      try {
+        setLoading(true);
+        const res = await fetch(`${process.env.REACT_APP_BASE_URL}/product`, {
+          credentials: "include",
+        });
+        const resData = await res.json();
+        setProductData(resData);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+        toast("Network Error , Reload Page And Try Again");
+      }
     })();
   }, []);
 
@@ -35,24 +40,29 @@ const DeleteProduct = () => {
   };
 
   const handleProductDelete = async () => {
-    setLoadingProductDelete(true);
-    const deleteProduct = await fetch(
-      `${process.env.REACT_APP_BASE_URL}/deleteproduct/${user?._id}`,
-      {
-        method: "DELETE",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(deleteProductList),
-      }
-    );
-    const res = await deleteProduct.json();
+    try {
+      setLoadingProductDelete(true);
+      const deleteProduct = await fetch(
+        `${process.env.REACT_APP_BASE_URL}/deleteproduct/${user?._id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(deleteProductList),
+        }
+      );
+      const res = await deleteProduct.json();
 
-    if (res) {
-      setLoadingProductDelete(false);
-      res.message && toast(res.message);
-      setProductData(res.data);
-      setDeleteProductList([]);
+      if (res) {
+        setLoadingProductDelete(false);
+        res.message && toast(res.message);
+        setProductData(res.data);
+        setDeleteProductList([]);
+      }
+    } catch (error) {
+      console.log(error);
+      toast("Network Error , Reload Page And Try Again");
     }
   };
 

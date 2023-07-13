@@ -5,6 +5,7 @@ import { SlRefresh } from "react-icons/sl";
 import { GiHamburger } from "react-icons/gi";
 import { setOrderData } from "../redux/orderSlice";
 import { Tooltip } from "react-tooltip";
+import {toast} from "react-hot-toast"
 import { useMediaQuery } from "react-responsive";
 
 
@@ -33,6 +34,7 @@ export default function OrderList() {
         setLoading(false);
       } catch (error) {
         console.log(error);
+        toast("Network Error , Reload Page And Try Again")
       }
     }
   };

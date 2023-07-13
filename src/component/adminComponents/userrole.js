@@ -50,6 +50,7 @@ const UserRole = () => {
       }
     } catch (error) {
       console.log(error);
+      toast("Network Error , Reload Page And Try Again")
     }
   };
 

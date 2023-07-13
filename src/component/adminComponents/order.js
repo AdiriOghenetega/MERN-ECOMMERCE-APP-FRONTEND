@@ -4,6 +4,7 @@ import { toast } from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { GrPrevious, GrNext } from "react-icons/gr";
 import { useNavigate } from "react-router-dom";
+import { numberWithCommas } from "../../utility/helper";
 
 const Orders = ({ location }) => {
   const [orderLoading, setOrderLoading] = useState(false);
@@ -42,6 +43,7 @@ const Orders = ({ location }) => {
       }
     } catch (error) {
       console.log(error);
+      toast("Network Error , Reload Page And Try Again")
     }
   };
 
@@ -83,6 +85,7 @@ const Orders = ({ location }) => {
       }
     } catch (error) {
       console.log(error);
+      toast("Network Error , Reload Page And Try Again")
     }
   };
 
@@ -112,6 +115,7 @@ const Orders = ({ location }) => {
       }
     } catch (error) {
       console.log(error);
+      toast("Network Error , Reload Page And Try Again")
     }
   };
 
@@ -144,6 +148,7 @@ const Orders = ({ location }) => {
       }
     } catch (error) {
       console.log(error);
+      toast("Network Error , Reload Page And Try Again")
     }
   };
 
@@ -239,7 +244,13 @@ const Orders = ({ location }) => {
                   className="m-auto w-full mt-2 shadow flex flex-col p-3 bg-slate-300/70"
                 >
                   <p className="text-sm"> Name : {elem?.name}</p>
-                  <p className="text-sm"> Price : {elem.price}</p>
+                  <div className="flex">
+                      <h3 >Price:</h3>
+                      <div className="flex flex-row ml-1">
+                        <h3 className="text-green-500 font-black ">₦</h3>
+                        <h3 className=" ">{numberWithCommas(elem.price)}</h3>
+                      </div>
+                    </div>
                   <p className="text-sm">Product Quantity : {elem.qty}</p>
                 </div>
               );
@@ -247,9 +258,13 @@ const Orders = ({ location }) => {
             <h2 className="text-bold mt-2 text-[rgb(233,142,30)]">
               Other Details :{" "}
             </h2>
-            <h2 className="text-bold m-auto w-full mt-2 shadow flex flex-col p-3 bg-slate-300/70">
-              Total Amount : {displayOrder[count]?.amount}
-            </h2>
+            <div className="text-bold m-auto w-full mt-4 shadow flex p-3 bg-slate-300/70">
+                      <h3 >Total Amount:</h3>
+                      <div className="flex flex-row ml-1">
+                        <h3 className="text-green-500 font-black ">₦</h3>
+                        <h3 className=" ">{numberWithCommas(displayOrder[count]?.amount)}</h3>
+                      </div>
+                    </div>
             <h2 className="text-bold m-auto w-full mt-4 shadow flex flex-col p-3 bg-slate-300/70">
               Payment Method : {displayOrder[count]?.paymentMethod}
             </h2>

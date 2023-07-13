@@ -91,6 +91,7 @@ const Header = () => {
                 data-tooltip-id="my-tooltip"
                 data-tooltip-content="Cart"
                 data-tooltip-hidden={isMobile && true}
+                className="text-black"
               />
               <div className="absolute -top-1 -right-1 text-white bg-[rgb(233,142,30)] h-4 w-4 rounded-full m-0 p-0 text-sm flex flex-col justify-center items-center ">
                 {cartItemNumber.length}
