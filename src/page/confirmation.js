@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { GiHamburger } from "react-icons/gi";
 import { toast } from "react-hot-toast";
 import { useDispatch } from "react-redux";
-import { setOrderData } from "../redux/productSlice";
 import { useNavigate } from "react-router-dom";
 import { setCartData } from "../redux/productSlice";
 
@@ -42,7 +41,6 @@ const Confirmation = () => {
         const res = await updateOrders.json();
 
         if (res) {
-          res.data && dispatch(setOrderData(res.data));
           setLoading(false);
           res.message && toast(res.message);
           dispatch(setCartData([]));
