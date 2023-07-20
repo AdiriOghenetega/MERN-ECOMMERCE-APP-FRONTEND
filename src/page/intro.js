@@ -51,7 +51,7 @@ const Intro = () => {
         <h1 className="text-2xl md:text-4xl text-[rgb(233,142,30)] p-2 drop-shadow-lg text-center my-8">
           Welcome to Hcue Restaurant
         </h1>
-        <h1 className="md:text-3xl text-2xl text-[rgb(233,142,30)] p-2 drop-shadow-lg text-center my-8 bg-[rgb(255,255,255,.8)] p-4 rounded">
+        <h1 className="md:text-3xl text-2xl text-[rgb(233,142,30)] p-2 drop-shadow-lg text-center my-4 bg-[rgb(255,255,255,.8)] p-4 rounded">
         How to order
         </h1>
         <div className="flex flex-col md:flex-row justify-center md:gap-3 md:gap-0 md:justify-evenly items-center w-full">

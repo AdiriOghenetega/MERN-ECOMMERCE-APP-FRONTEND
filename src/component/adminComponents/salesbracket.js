@@ -33,9 +33,9 @@ const SalesBracket = ({ sales, totalSales, title, chartData, title2 }) => {
                     key={elem._id}
                     className="flex justify-between items-center"
                   >
-                    <div className="md:flex">
-                      <h3 className="font-bold">Customer Name:</h3>
-                      <h3 className="ml-2">
+                    <div className="">
+                      <h3 className="font-bold text-sm md:text-base">Customer Name:</h3>
+                      <h3 className="ml-2 text-sm md:text-base">
                         {elem?.user?.firstName
                           ? elem?.user?.firstName + " " + elem?.user?.lastName
                           : elem?.guest?.firstName +
@@ -44,15 +44,15 @@ const SalesBracket = ({ sales, totalSales, title, chartData, title2 }) => {
                       </h3>
                     </div>
                     <div>
-                      <h3 className="font-bold">Amount:</h3>
+                      <h3 className="font-bold text-sm md:text-base">Amount:</h3>
                       <div className="flex flex-row">
-                        <h3 className="text-green-500 font-black ">₦</h3>
-                        <h3 className=" ">{numberWithCommas(elem.amount)}</h3>
+                        <h3 className="text-green-500 font-black text-sm md:text-base">₦</h3>
+                        <h3 className="text-sm md:text-base">{numberWithCommas(elem.amount)}</h3>
                       </div>
                     </div>
                     <div className="my-2 flex flex-col justify-between items-center">
-                      <h3 className="font-bold text-black ">Order Date:</h3>
-                      <h3 className="ml-2">
+                      <h3 className="font-bold text-black text-sm md:text-base">Order Date:</h3>
+                      <h3 className="ml-2 text-sm md:text-base">
                         {new Date(elem.createdAt.split("T")[0]).toDateString()}
                       </h3>
                     </div>
