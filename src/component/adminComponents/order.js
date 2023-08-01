@@ -43,6 +43,7 @@ const Orders = ({ location }) => {
       }
     } catch (error) {
       console.log(error);
+      setOrderLoading(false);
       toast("Network Error , Reload Page And Try Again")
     }
   };
@@ -85,6 +86,7 @@ const Orders = ({ location }) => {
       }
     } catch (error) {
       console.log(error);
+      setOrderLoading(false);
       toast("Network Error , Reload Page And Try Again")
     }
   };
@@ -115,6 +117,7 @@ const Orders = ({ location }) => {
       }
     } catch (error) {
       console.log(error);
+      setOrderLoading(false)
       toast("Network Error , Reload Page And Try Again")
     }
   };
@@ -148,6 +151,7 @@ const Orders = ({ location }) => {
       }
     } catch (error) {
       console.log(error);
+      setOrderLoading(false);
       toast("Network Error , Reload Page And Try Again")
     }
   };

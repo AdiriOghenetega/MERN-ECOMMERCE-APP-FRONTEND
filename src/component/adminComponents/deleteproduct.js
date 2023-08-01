@@ -26,6 +26,7 @@ const DeleteProduct = () => {
         setLoading(false);
       } catch (error) {
         console.log(error);
+        setLoading(false);
         toast("Network Error , Reload Page And Try Again");
       }
     })();
@@ -62,6 +63,7 @@ const DeleteProduct = () => {
       }
     } catch (error) {
       console.log(error);
+      setLoadingProductDelete(false)
       toast("Network Error , Reload Page And Try Again");
     }
   };

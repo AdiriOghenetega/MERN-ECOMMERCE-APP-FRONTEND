@@ -36,6 +36,7 @@ const UpdateProducts = () => {
         setReloadPage(false);
       } catch (error) {
         console.log(error);
+        setLoading(false);
         toast("Network Error , Reload Page And Try Again");
       }
     })();
@@ -76,6 +77,7 @@ const UpdateProducts = () => {
       }
     } catch (error) {
       console.log(error);
+      setLoadingOn(false);
       toast("Network Error , Reload Page And Try Again");
     }
   };
@@ -108,6 +110,7 @@ const UpdateProducts = () => {
       }
     } catch (error) {
       console.log(error);
+      setLoadingOff(false);
       toast("Network Error , Reload Page And Try Again");
     }
   };

@@ -40,6 +40,7 @@ const IntroComponent = ({ closed }) => {
         navigate(`/menu/${ltn}`);
       } catch (error) {
         console.log(error);
+        setLoading(false);
         toast("Network Error , Reload Page And Try Again");
       }
     })();

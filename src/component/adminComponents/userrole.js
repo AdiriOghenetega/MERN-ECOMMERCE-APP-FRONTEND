@@ -50,6 +50,7 @@ const UserRole = () => {
       }
     } catch (error) {
       console.log(error);
+      setRoleLoading(false);
       toast("Network Error , Reload Page And Try Again")
     }
   };

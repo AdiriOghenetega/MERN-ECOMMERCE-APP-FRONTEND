@@ -77,8 +77,7 @@ const Cart = () => {
     }
   }, [customerLocation, location]);
 
-  const userLocation = async (address) => {
-    try {
+  const userLocation = (address) => {
       console.log(address);
       setCustomerLocation({
         latitude: address.latitude,
@@ -94,10 +93,6 @@ const Cart = () => {
           longitudeDelta: 0.0421,
         })
       );
-    } catch (error) {
-      console.log(error);
-      toast("Network Error , Reload Page And Try Again")
-    }
   };
 
   const handleOnChange = (e) => {
@@ -159,6 +154,7 @@ const Cart = () => {
       window.location.href = data.data.authorization_url;
     }catch(error){
       console.log(error)
+      setPaymentLoading(false);
       toast("Network Error , Reload Page And Try Again")
     }
     } else {

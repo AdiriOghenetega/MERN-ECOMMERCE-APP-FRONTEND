@@ -34,6 +34,7 @@ export default function OrderList() {
         setLoading(false);
       } catch (error) {
         console.log(error);
+        setLoading(false);
         toast("Network Error , Reload Page And Try Again")
       }
     }
