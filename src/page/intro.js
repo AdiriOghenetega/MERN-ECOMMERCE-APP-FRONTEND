@@ -106,11 +106,13 @@ const Intro = () => {
             order, and pick up in-store or have it delivered to your doorstep.
           </h3>
           <div className="flex md:w-[330px] w-full justify-between items-center">
+            <a href="https://expo.dev/artifacts/eas/27yr1yq7LhTyyGaRfZTp4Q.apk" target="_blank">
             <img
               src={gstore}
               alt="googlestore"
               className="h-[45px] md:w-[150px] w-[40%] w-auto drop-shadow-lg"
             />
+            </a>
             <img
               src={istore}
               alt="applestore"
