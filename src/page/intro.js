@@ -54,7 +54,7 @@ const Intro = () => {
         <h1 className="md:text-3xl text-2xl text-[rgb(233,142,30)] p-2 drop-shadow-lg text-center my-4 bg-[rgb(255,255,255,.8)] p-4 rounded">
         How to order
         </h1>
-        <div className="flex flex-col md:flex-row justify-center md:gap-3 md:gap-0 md:justify-evenly items-center w-full">
+        <div className="flex flex-col md:flex-row justify-center md:justify-evenly items-center w-full">
           <div className="flex flex-col justify-start items-center border-2 p-2 drop-shadow h-[300px] bg-[rgb(255,255,255,.8)] min-w-[80%] md:min-w-0">
             <div className="flex flex-col justify-center my-10 items-center text-[rgb(233,142,30)] animate-bounce">
               <MdShareLocation size="100px" />
@@ -67,7 +67,7 @@ const Intro = () => {
               location.
             </h3>
           </div>
-          <div className="flex flex-col justify-start items-center border-2 p-2 drop-shadow h-[300px] bg-[rgb(255,255,255,.8)] min-w-[80%] md:min-w-0 mt-4">
+          <div className="flex flex-col justify-start items-center border-2 p-2 drop-shadow h-[300px] bg-[rgb(255,255,255,.8)] min-w-[80%] md:min-w-0 mt-4 md:mt-0">
             <div className="flex flex-col justify-center my-10 items-center text-[rgb(233,142,30)] animate-bounce">
               <MdFoodBank size="100px" />
             </div>
@@ -79,7 +79,7 @@ const Intro = () => {
               menu.
             </h3>
           </div>
-          <div className="flex flex-col justify-start items-center border-2 p-2 drop-shadow h-[300px] bg-[rgb(255,255,255,.8)] min-w-[80%] md:min-w-0 mt-4">
+          <div className="flex flex-col justify-start items-center border-2 p-2 drop-shadow h-[300px] bg-[rgb(255,255,255,.8)] min-w-[80%] md:min-w-0 mt-4 md:mt-0">
             <div className="flex flex-col justify-center my-10 items-center text-[rgb(233,142,30)] animate-bounce">
               <IoFastFoodOutline size="100px" />
             </div>
